@@ -1,0 +1,46 @@
+/* Reset layout issues */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Wrap content to prevent stretching on big screens */
+  .container, .content-section, .hero-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Make all images responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Global text alignment on small screens */
+  @media (max-width: 768px) {
+    h1 { font-size: 2rem; text-align: center; }
+    h2 { font-size: 1.5rem; text-align: center; }
+    p, ul, li { font-size: 0.95rem; }
+  }
+  
+  /* Utility spacing helpers */
+  .section-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .text-center-md {
+    text-align: center;
+  }
+  
+  @media (min-width: 768px) {
+    .text-center-md {
+      text-align: left;
+    }
+  }
+  

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBSE Affiliation | National Public School Shivamogga</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-red: #8C1515;
+            --secondary-red: #B1040E;
+            --light-beige: #F4F4F0;
+            --cool-grey: #4D4F53;
+            --warm-grey: #7D7878;
+            --dark-grey: #2E2D29;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-beige);
+            color: var(--dark-grey);
+            line-height: 1.8;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-red);
+        }
+
+        /* Navigation */
+        .dropdown-item:hover {
+            background-color: rgba(140, 21, 21, 0.1);
+            color: #8c1515;
+            font-weight: 500;
+        }
+
+        .dropdown-item.active {
+            color: #fff;
+            background-color: #8c1515;
+            font-weight: bold;
+        }
+
+        .hover-dropdown:hover .custom-arrow::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-item.active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(232, 227, 227, 0.9), rgba(140, 21, 21, 0.95)),
+                url('images/NES/nes.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .hero-section:after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--light-beige);
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Table Styles */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-table th {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .info-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .info-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Download Button */
+        .download-btn {
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background-color: var(--secondary-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .download-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 5px solid #ffc107;
+            background-color: var(--dark-grey);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-title {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: white;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin-right: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+            
+            .info-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        ::selection {
+            background-color: red;
+            color: white;
+        }
+        .dropdown-menu.custom-dropdown {
+            right: 0 !important;
+            left: auto !important;
+            margin-top: 0;
+            /* Remove default dropdown spacing if needed */
+        }
+        
+        /* Multi-level dropdown (right side) */
+        .dropdown-submenu .submenu {
+            top: 0;
+            left: 100%;
+            margin-left: 0.1rem;
+            display: none;
+            position: absolute;
+            border-radius: 0.375rem;
+            background-color: white;
+            z-index: 1050;
+        }
+        
+        .dropdown-submenu:hover>.submenu {
+            display: block;
+        }
+        
+        .dropdown-submenu>a::after {
+            content: "▶";
+            float: right;
+            margin-top: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .submenu {
+            transition: all 0.2s ease;
+        }
+        
+        /* Submenu opens to the right */
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu>.dropdown-item {
+            position: relative;
+        }
+        
+        .dropdown-submenu>.dropdown-item::after {
+            content: "▶";
+            position: absolute;
+            right: 10px;
+            font-size: 0.7rem;
+        }
+        
+        
+        /* Only show submenu when hovering on Management specifically */
+        .dropdown-submenu .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 0.2rem;
+            background: #fff;
+            min-width: 220px;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1050;
+        }
+        
+        /* Show only when hovering directly on the .submenu-trigger */
+        .dropdown-submenu:hover>.submenu {
+            display: block;
+            opacity: 1;
+            font-size: visible;
+        }
+        
+        /* Optional: remove default caret */
+        .dropdown-submenu>a::after {
+            display: none;
+        }
+        
+        /* Small subtle arrow to the right */
+        .submenu-trigger span {
+            font-size: 1rem;
+            color: #8C1515;
+        }
+        /* Prevent submenus from showing automatically */
+        .dropdown-menu .dropdown-submenu .submenu {
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+          }
+          
+          /* Show submenu only when hovering directly on 'Management' */
+          .dropdown-menu .dropdown-submenu:hover > .submenu {
+            display: block !important;
+            opacity: 1;
+            visibility: visible;
+          }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-center">
+                        <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px; margin-top: 10px;">
+                        <div class="logo-text">
+                            <h1 class="mb-0">National Public School</h1>
+                            <h2 class="mb-0 small">Shivamogga - since 2009</h2>
+                        </div>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                About School
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
+                                <li><a class="dropdown-item" href="nes.html">NES Shivamogga</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="nps.html">NPS</a></li>
+                                <li><a class="dropdown-item" href="vision-mission.html">Vision & Mission</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="principal-desk.html">Principal's Desk</a></li>
+                                <!-- Management Submenu (inside About School dropdown) -->
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                    Management
+                                    <span class="ms-2 small">&rsaquo;</span>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
+                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
+                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                    </ul>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="board-results.html">Board Results</a></li>
+                                <li><a class="dropdown-item active" href="cbse-affiliation.html">CBSE Affiliation</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="academicsDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Academics
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="academicsDropdownNav">
+                                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="registrationform.html">Registration Form</a></li>
+                                <li><a class="dropdown-item" href="transfercertificate.html">Transfer Certificate</a></li>
+                                <li><a class="dropdown-item" href="alumniform.html">Alumni - Registration form</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="facilities.html">Facilities</a></li>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="galleryDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Gallery
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="galleryDropdownNav">
+                                <li><a class="dropdown-item" href="adyayan.html">Adhyayan</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="photogallery.html">Photo Gallery</a></li>
+                                <li><a class="dropdown-item" href="videogallery.html">Video Gallery</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center">
+        <div class="container text-center position-relative z-index-2">
+            <h1 class="hero-title animate__animated animate__fadeInDown">CBSE Affiliation</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Official documents and information</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <!-- General Information -->
+                    <div class="info-card animate__animated animate__fadeIn" data-aos="fade-up">
+                        <h2 class="section-title">A. GENERAL INFORMATION</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>INFORMATION</th>
+                                    <th>DETAILS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>NAME OF THE SCHOOL</td>
+                                    <td>NATIONAL PUBLIC SCHOOL SHIVAMOGGA</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>APPLICATION NO (IF APPLICABLE)</td>
+                                    <td>505053</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>SCHOOL CODE (IF APPLICABLE)</td>
+                                    <td>43554</td>
+                                </tr>
+                                <tr>
+                                    <td>G</td>
+                                    <td>COMPLETE ADDRESS WITH PINCODE</td>
+                                    <td>5TH CROSS, SHESHADRIPURAM, SHIVAMOGGA 577201, KARNATAKA</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>PRINCIPAL NAME</td>
+                                    <td>NAVEENA M PAIS</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>PRINCIPAL QUALIFICATION</td>
+                                    <td>M.A., M.Ed., PGDCA</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>SCHOOL EMAIL</td>
+                                    <td>npsshivamogga@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>CONTACT DETAILS</td>
+                                    <td>9019174325, 7676618762</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Documents and Information -->
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-1s" data-aos="fade-up">
+                        <h2 class="section-title">B. DOCUMENTS AND INFORMATION</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>DOCUMENTS/INFORMATION</th>
+                                    <th>DOWNLOAD/DETAILS</th>
+                                    <th>FORMER FILE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>COPIES OF AFFLICATION (IF APPLICATION LETTER AND RECENT EXTENSION OF AFFILIATION)</td>
+                                    <td><a href="images/cbse-affiliation/affiliation.pdf" class="download-btn" download><i class="fas fa-download"></i> Application of NPS</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>P</td>
+                                    <td>COPIES OF SOCIETIES/TRUST/COMPANY REGISTRATION/MEMORANDUM, AS APPLICABLE</td>
+                                    <td><a href="images/cbse-affiliation/details of chairman and society.pdf" class="download-btn" download><i class="fas fa-download"></i> Details of Chairman & Members by Society</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Copy of the No Objection Certificate (NOC) issued if applicable by the State Govt./UT</td>
+                                    <td><a href="images/cbse-affiliation/noc.pdf" class="download-btn" download><i class="fas fa-download"></i> State Government NOC</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Copies of recognition Certificate UNDER (RTE, 2009 and its amendments). / Application</td>
+                                    <td><a href="images/cbse-affiliation/nps recognization 23.pdf" class="download-btn" download><i class="fas fa-download"></i> NPS Recognition</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Copy of the approval or permission as per the National Building Code</td>
+                                    <td><a href="images/cbse-affiliation/building stability.pdf" class="download-btn" download><i class="fas fa-download"></i> Building authority</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>Copies of valid Fire Safety Certification issued by the Competent Authority</td>
+                                    <td><a href="images/cbse-affiliation/nps fire saqfety.pdf" class="download-btn" download><i class="fas fa-download"></i> HPS FIRE-SAFETY 2023-24</a></td>
+                                    <td>24/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>P</td>
+                                    <td>COPES OF THE DE CERTIFICATE SUBMITTING OF THE SCHOOL/SOC</td>
+                                    <td><a href="images/cbse-affiliation/deo certificate.pdf" class="download-btn" download><i class="fas fa-download"></i> SPD Certification</a></td>
+                                    <td>24/04/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>Copies of valid Water, Health and Sanitation Certificate</td>
+                                    <td><a href="images/cbse-affiliation/building water saftey.pdf" class="download-btn" download><i class="fas fa-download"></i> Water safety</a></td>
+                                    <td>26/04/2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Result and Academics -->
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-2s" data-aos="fade-up">
+                        <h2 class="section-title">C. RESULT AND ACADEMICS</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>DOCUMENTS/INFORMATION</th>
+                                    <th>DOWNLOAD/DETAILS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>FEE STRUCTURE OF THE SCHOOL</td>
+                                    <td><a href="images/cbse-affiliation/fees 24-25.pdf" class="download-btn" download><i class="fas fa-download"></i> No. 2024-25</a></td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>ANNUAL ACADEMIC CALENDER</td>
+                                    <td><a href="images/cbse-affiliation/annual calender.pdf" class="download-btn" download><i class="fas fa-download"></i> Annual Educational calendar</a></td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>LIST OF SCHOOL MANAGEMENT COMMITTEE (SMC)</td>
+                                    <td><a href="images/cbse-affiliation/school management committe.pdf" class="download-btn" download><i class="fas fa-download"></i> School management committee</a></td>
+                                </tr>
+                                <tr>
+                                    <td>G</td>
+                                    <td>LIST OF PARENT TEACHERS ASSOCIATION (PTA) MEMBERS</td>
+                                    <td><a href="images/cbse-affiliation/parents teachers association.pdf" class="download-btn" download><i class="fas fa-download"></i> Parents Teachers Association</a></td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>LAST THREE YEAR RESULTS OF THE BOARD EXAMINATION AS PER APPLICABLE BODY</td>
+                                    <td><a href="images/cbse-affiliation/class 10th result.pdf" class="download-btn" download><i class="fas fa-download"></i> Class XII Result</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Staff (Teaching) -->
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-3s" data-aos="fade-up">
+                        <h2 class="section-title">D. STAFF (TEACHING)</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>INFORMATION</th>
+                                    <th>DETAILS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>PRINCIPAL</td>
+                                    <td>NAVEENA M PAIS</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>TOTAL NO. OF TEACHERS</td>
+                                    <td>35</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>TGT</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>PRT</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>PGT</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>TEACHERS SECTION RATIO</td>
+                                    <td>1:25</td>
+                                </tr>
+                                <tr>
+                                    <td>G</td>
+                                    <td>DETAILS OF SPECIAL EDUCATOR</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>DETAILS OF COUNSELOR AND WILDLESS TEACHER</td>
+                                    <td>Dr. ANTHONY V.11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Result Class X -->
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-4s" data-aos="fade-up">
+                        <h2 class="section-title">RESULT CLASS X</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>YEAR</th>
+                                    <th>NO. OF REGISTERED STUDENTS</th>
+                                    <th>NO. OF STUDENTS PASSED</th>
+                                    <th>PASS PERCENTAGE</th>
+                                    <th>REMARKS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>2022-23</td>
+                                    <td>120</td>
+                                    <td>120</td>
+                                    <td>100%</td>
+                                    <td>Excellent</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- School Infrastructure -->
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-5s" data-aos="fade-up">
+                        <h2 class="section-title">E: SCHOOL INFRASTRUCTURE</h2>
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>SLNO</th>
+                                    <th>INFORMATION</th>
+                                    <th>DETAILS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>TOTAL CAMPUS AREA OF THE SCHOOL (IN SQ.MTS)</td>
+                                    <td>5435.84 Sq.mts</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>NO. AND SIZE OF THE CLASS ROOMS (IN SQ.MTS)</td>
+                                    <td>25 (8m x 6m)</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>NO. AND SIZE OF LABORATORIES INCLUDING COMPUTER LABS (IN SQ.MTS)</td>
+                                    <td>2 (10m x 12m)</td>
+                                </tr>
+                                <tr>
+                                    <td>G</td>
+                                    <td>INTERNET FACILITY</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>NO. OF GIRLS TOILETS</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>NO. OF BOYS TOILETS</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>P</td>
+                                    <td>LINK OF VIDEO OF THE INSPECTION OF SCHOOL COVERING THE INFRASTRUCTURE OF THE SCHOOL</td>
+                                    <td><a href="https://www.youtube.com/watch?v=tWbkaNDfTls" class="download-btn"><i class="fas fa-video"></i> School Video</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-white py-5" style="background-color: #111; border-top: 5px solid #ffc107;">
+        <div class="container">
+          <div class="row gy-4 justify-content-center">
+            <!-- About -->
+            <div class="col-lg-4 col-md-6">
+              <h5 class="text-warning mb-3">National Public School</h5>
+              <p class="text-white-50">Providing quality education since 2009. We nurture curious, knowledgeable, and caring young people to build a better world.</p>
+              <div class="d-flex gap-3 mt-3">
+                <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/nps_shivamogga" class="text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://youtube.com/@nationalpublicschoolshivam1377" class="text-white"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+      
+            <!-- Quick Links (centered) -->
+            <div class="col-lg-3 col-md-6 mx-auto text-center">
+              <h5 class="text-warning mb-3">Quick Links</h5>
+              <ul class="list-unstyled text-white-50">
+                <li><a href="index.html" class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
+                <li><a href="nps.html" class="text-white-50 text-decoration-none d-block mb-2">About School</a></li>
+                <li><a href="magazine.html" class="text-white-50 text-decoration-none d-block mb-2">Magazine</a></li>
+                <li><a href="academics.html" class="text-white-50 text-decoration-none d-block mb-2">Academics</a></li>
+                <li><a href="facilities.html" class="text-white-50 text-decoration-none d-block mb-2">Facilities</a></li>
+                <li><a href="gallery.html" class="text-white-50 text-decoration-none d-block mb-2">Gallery</a></li>
+                <li><a href="contact.html" class="text-white-50 text-decoration-none d-block mb-2">Contact Us</a></li>
+              </ul>
+            </div>
+      
+            <!-- Contact -->
+            <div class="col-lg-4 col-md-6">
+              <h5 class="text-warning mb-3">Contact Us</h5>
+              <ul class="list-unstyled text-white-50">
+                <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-warning"></i> 5th Cross, Sheshadripuram, Shivamogga, Karnataka 577201</li>
+                <li class="mb-2"><i class="fas fa-phone-alt me-2 text-warning"></i> 9019174325, 7676618762</li>
+                <li><i class="fas fa-envelope me-2 text-warning"></i> npsshivamogga@gmail.com</li>
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Footer Bottom -->
+          <hr class="my-4 bg-secondary">
+          <div class="text-center">
+            <p class="mb-0 text-white-50 small">
+              &copy; <span id="currentYear"></span> NPS Shivamogga. All Rights Reserved.
+              | <a href="#" class="text-white-50">Privacy Policy</a>
+              | <a href="#" class="text-white-50">Terms of Service</a>
+            </p>
+          </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Staggered animations for nav items
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('[data-delay]');
+            navItems.forEach(item => {
+                const delay = item.getAttribute('data-delay');
+                item.style.animationDelay = delay + 'ms';
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 100) {
+                    document.querySelector('.navbar').style.padding = '0.5rem 0';
+                } else {
+                    document.querySelector('.navbar').style.padding = '1rem 0';
+                }
+            });
+        });
+
+        // Initialize animations on page load for users who don't move mouse immediately
+        setTimeout(triggerAnimations, 1000);
+        window.addEventListener("scroll", function () {
+            const navbar = document.getElementById("mainNavbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('.hover-dropdown').forEach(function (dropdown) {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+      
+            dropdown.addEventListener('mouseenter', function () {
+              dropdown.classList.add('show');
+              toggle.classList.add('show');
+              menu.classList.add('show');
+            });
+      
+            dropdown.addEventListener('mouseleave', function () {
+              dropdown.classList.remove('show');
+              toggle.classList.remove('show');
+              menu.classList.remove('show');
+            });
+          });
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
