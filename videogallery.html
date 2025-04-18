@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery - National Public School Shivamogga</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-red: #8C1515;
+            --secondary-red: #B1040E;
+            --light-beige: #F4F4F0;
+            --cool-grey: #4D4F53;
+            --warm-grey: #7D7878;
+            --dark-grey: #2E2D29;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-beige);
+            color: var(--dark-grey);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-red);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(228, 224, 224, 0.6), #8C1515f2), 
+                        url('images/events/mes-habba-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section:after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--light-beige);
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeInDown 1s ease;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+
+        /* Container Sizes - Enhanced for better responsiveness */
+        .custom-container {
+            max-width: 1400px;
+            padding: 0 1.5rem;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1400px) {
+            .custom-container {
+                max-width: 1320px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .custom-container {
+                max-width: 1140px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .custom-container {
+                max-width: 960px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .custom-container {
+                max-width: 720px;
+                padding: 0 1.25rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .custom-container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+        }
+
+        .video-gallery-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Enhanced Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            background: #000;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .video-wrapper:hover .video-cover {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: rgba(140, 21, 21, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
+
+        .video-card:hover .play-button {
+            background-color: var(--primary-red);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .yt-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .video-info h4 {
+            color: var(--primary-red);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Category Filter - Enhanced for mobile */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            color: var(--cool-grey);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .video-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--primary-red);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            z-index: 1;
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Enhanced Mobile Experience */
+        @media (max-width: 1200px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .video-gallery-container {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+
+            .video-gallery-container {
+                padding: 2rem;
+                border-radius: 12px;
+            }
+            
+            .category-filter {
+                gap: 0.5rem;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+                scrollbar-width: none; /* Firefox */
+            }
+            
+            .category-filter::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+                flex: 0 0 auto; /* Prevent shrinking */
+            }
+            
+            /* Mobile-first grid approach */
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .video-gallery-container {
+                padding: 1.5rem;
+                border-radius: 10px;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+                font-size: 1.8rem;
+            }
+            
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .play-button:before {
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-left: 20px solid white;
+            }
+            
+            /* Enhanced touch targets for mobile */
+            .video-card {
+                transition: transform 0.2s ease;
+            }
+            
+            .video-card:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Special "wow" effects for mobile */
+        @media (max-width: 768px) {
+            .hero-section {
+                background-attachment: scroll;
+            }
+            
+            .video-card {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            }
+            
+            .video-wrapper {
+                border-radius: 8px 8px 0 0;
+            }
+            
+            /* Add a subtle parallax effect on scroll for mobile */
+            @media (prefers-reduced-motion: no-preference) {
+                .hero-section {
+                    background-attachment: fixed;
+                }
+            }
+        }
+
+        /* Enhanced hover effects for devices that support hover */
+        @media (hover: hover) {
+            .video-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            }
+            
+            .filter-btn:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-center">
+                        <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px; margin-top: 10px;">
+                        <div class="logo-text">
+                            <h1 class="mb-0">National Public School</h1>
+                            <h2 class="mb-0 small">Shivamogga - since 2009</h2>
+                        </div>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                About School
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
+                                <li><a class="dropdown-item" href="nes.html">NES Shivamogga</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="nps.html">NPS</a></li>
+                                <li><a class="dropdown-item" href="vission-mission.html">Vision & Mission</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="principal-desk.html">Principal's Desk</a></li>
+                                <li><a class="dropdown-item" href="management.html">Management</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="board-results.html">Board Results</a></li>
+                                <li><a class="dropdown-item" href="cbse-affiliation.html">CBSE Affiliation</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Academics
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
+                                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="registrationform.html">Registration Form</a></li>
+                                <li><a class="dropdown-item" href="transfercertificate.html">Transfer Certificate</a></li>
+                                <li><a class="dropdown-item" href="alumniform.html">Alumni - Registration form</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="facilities.html">Facilities</a></li>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle custom-arrow active" href="#" id="aboutDropdownNav" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Gallery
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
+                                <li><a class="dropdown-item" href="adyayan.html">Adhyayan</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="photogallery.html">Photo Gallery</a></li>
+                                <li><a class="dropdown-item active" href="videogallery.html">Video Gallery</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center">
+        <div class="container text-center position-relative z-index-2">
+            <h1 class="hero-title animate_animated animate_fadeInDown">Video Gallery</h1>
+            <p class="lead animate_animated animatefadeInUp animate_delay-1s">Relive our cherished moments at NPS Shivamogga</p>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section class="content-section">
+        <div class="container custom-container">
+            <div class="video-gallery-container" data-aos="fade-up">
+                <h2 class="section-title">Our Video Collections</h2>
+                <p class="mb-4 text-center">Experience the vibrant life at NPS Shivamogga through our video archives</p>
+                <!-- Video Grid -->
+                <div class="video-grid">
+                    <!-- Video Card 1 -->
+                    <div class="video-card" data-category="events" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/Facilities/ADMIN-BLOCK.jpg" alt="About NPS" class="video-cover">
+                            <iframe class="yt-video" 
+                                data-src="images/videos/7.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>About NPS</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Card 2 -->
+                    <div class="video-card" data-category="events" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/nps/about.jpg" alt="About NPS" class="video-cover">
+                            <iframe class="yt-video" 
+                                data-src="images/videos/2.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>Amrutha Mahotsav</h4>
+                        </div>
+                    </div>
+                
+                    <!-- Video Card 3 -->
+                    <div class="video-card" data-category="cultural" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/Photo Gallery/amrutha nadige 3.jpg" alt="About NPS" class="video-cover">
+
+                            <iframe class="yt-video" 
+                                data-src="images/videos/4.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>Amrutha Nadige</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Card 4 -->
+                    <div class="video-card" data-category="events" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/Programs/amruth-5-Independence-Day-1024x580.jpg" alt="About NPS" class="video-cover">
+                            <iframe class="yt-video" 
+                                data-src="images/videos/5.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>NPS Republic and Independence Day</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Card 5 -->
+                    <div class="video-card" data-category="academics" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/nps/main image-2.jpeg" alt="About NPS" class="video-cover">
+                            <iframe class="yt-video" 
+                                data-src="images/videos/3.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>NPS 2</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Card 6 -->
+                    <div class="video-card" data-category="events" data-aos="zoom-in">
+                        <div class="video-wrapper">
+                            <img src="images/Programs/amruth-17-community day.jpg" alt="About NPS" class="video-cover">
+                            <iframe class="yt-video" 
+                                data-src="images/videos/6.mp4" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>Alumni Meet</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-white py-5" style="background-color: #111; border-top: 5px solid #ffc107;">
+        <div class="container">
+          <div class="row gy-4 justify-content-center">
+            <!-- About -->
+            <div class="col-lg-4 col-md-6">
+              <h5 class="text-warning mb-3">National Public School</h5>
+              <p class="text-white-50">Providing world-class education since 2009. We nurture curious, knowledgeable, and caring young people to build a better world.</p>
+              <div class="d-flex gap-3 mt-3">
+                <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/nps_shivamogga" class="text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://youtube.com/@nationalpublicschoolshivam1377" class="text-white"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+      
+            <!-- Quick Links (centered) -->
+            <div class="col-lg-3 col-md-6 mx-auto text-center">
+              <h5 class="text-warning mb-3">Quick Links</h5>
+              <ul class="list-unstyled text-white-50">
+                <li><a href="index.html" class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
+                <li><a href="nps.html" class="text-white-50 text-decoration-none d-block mb-2">About School</a></li>
+                <li><a href="magazine.html" class="text-white-50 text-decoration-none d-block mb-2">Magazine</a></li>
+                <li><a href="academics.html" class="text-white-50 text-decoration-none d-block mb-2">Academics</a></li>
+                <li><a href="facilities.html" class="text-white-50 text-decoration-none d-block mb-2">Facilities</a></li>
+                <li><a href="gallery.html" class="text-white-50 text-decoration-none d-block mb-2">Gallery</a></li>
+                <li><a href="contact.html" class="text-white-50 text-decoration-none d-block mb-2">Contact Us</a></li>
+              </ul>
+            </div>
+      
+            <!-- Contact -->
+            <div class="col-lg-4 col-md-6">
+              <h5 class="text-warning mb-3">Contact Us</h5>
+              <ul class="list-unstyled text-white-50">
+                <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-warning"></i> 5th Cross, Sheshadripuram, Shivamogga, Karnataka 577201</li>
+                <li class="mb-2"><i class="fas fa-phone-alt me-2 text-warning"></i> 9019174325, 7676618762</li>
+                <li><i class="fas fa-envelope me-2 text-warning"></i> npsshivamogga@gmail.com</li>
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Footer Bottom -->
+          <hr class="my-4 bg-secondary">
+          <div class="text-center">
+            <p class="mb-0 text-white-50 small">
+              &copy; <span id="currentYear"></span> NPS Shivamogga. All Rights Reserved.
+              | <a href="#" class="text-white-50">Privacy Policy</a>
+              | <a href="#" class="text-white-50">Terms of Service</a>
+            </p>
+          </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                document.querySelector('.navbar').style.padding = '0.5rem 0';
+            } else {
+                document.querySelector('.navbar').style.padding = '1rem 0';
+            }
+        });
+
+        // Video play functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle video play on click
+            document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+                wrapper.addEventListener('click', function() {
+                    const cover = this.querySelector('.video-cover');
+                    const iframe = this.querySelector('.yt-video');
+                    
+                    // Load video
+                    iframe.src = iframe.dataset.src;
+                    iframe.style.display = 'block';
+                    cover.style.opacity = '0';
+                    
+                    // Hide cover after transition
+                    setTimeout(() => {
+                        cover.style.display = 'none';
+                    }, 300);
+                });
+            });
+
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const videoCards = document.querySelectorAll('.video-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.dataset.filter;
+                    
+                    // Filter videos
+                    videoCards.forEach(card => {
+                        if (filterValue === 'all' || card.dataset.category === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+
+        // Hover dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.hover-dropdown').forEach(function(dropdown) {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                const menu = dropdown.querySelector('.dropdown-menu');
+          
+                dropdown.addEventListener('mouseenter', function() {
+                    dropdown.classList.add('show');
+                    toggle.classList.add('show');
+                    menu.classList.add('show');
+                });
+          
+                dropdown.addEventListener('mouseleave', function() {
+                    dropdown.classList.remove('show');
+                    toggle.classList.remove('show');
+                    menu.classList.remove('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
