@@ -46,7 +46,7 @@
             color: var(--primary-red);
         }
 
-        /navigation bar/
+        /*navigation bar*/
         /* Transparent & Stylish Dropdown */
         .navbar-nav .dropdown-menu {
             position: absolute;
@@ -530,6 +530,45 @@
             opacity: 1;
             visibility: visible;
         }
+        /* Mobile-specific styles */
+@media (max-width: 768px) {
+    .dropdown-menu.submenu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        transform: none;
+        margin-top: 0.5rem;
+        border: 1px solid rgba(0,0,0,.15);
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1.5rem !important;
+    }
+    
+    .dropdown-menu.submenu .dropdown-item {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+}
+
+/* General improvements for all screens */
+.dropdown-menu.submenu {
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.dropdown-menu.submenu .dropdown-item {
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu.submenu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #0d6efd;
+}
+
+.dropdown-menu.submenu .dropdown-item:active {
+    background-color: #e9ecef;
+}
     </style>
 </head>
 
@@ -583,10 +622,12 @@
                                         Management
                                         <span class="ms-2 small">&rsaquo;</span>
                                     </a>
-                                    <ul class="dropdown-menu submenu">
-                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
-                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
-                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                    <ul class="dropdown-menu submenu shadow-lg" style="min-width: 250px;">
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="president.html">President's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="secretary.html">Secretary's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="directors.html">Board of Directors</a></li>
                                     </ul>
                                 </li>
                                 <li>
