@@ -22,7 +22,6 @@
     <style>
         :root {
             --primary-red: #8C1515;
-            /* Stanford Cardinal Red */
             --secondary-red: #B1040E;
             --light-beige: #F4F4F0;
             --cool-grey: #4D4F53;
@@ -35,6 +34,8 @@
             background-color: var(--light-beige);
             color: var(--dark-grey);
             line-height: 1.8;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         h1,
@@ -47,54 +48,70 @@
             color: var(--primary-red);
         }
 
-        /navigation bar/
-        /* Transparent & Stylish Dropdown */
-
-        /* Dropdown items hover */
-        .dropdown-item:hover {
-            background-color: rgba(140, 21, 21, 0.1);
-            color: #8c1515;
+        /* Navigation */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0 !important;
+        }
+        
+        .navbar-brand .logo-text h1 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .navbar-brand .logo-text h2 {
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+        
+        .nav-link {
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            position: relative;
         }
-
-        /* Active Item in Red */
-        .dropdown-item.active {
-            color: #fff;
-            background-color: #8c1515;
-            font-weight: bold;
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background-color: var(--primary-red);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
-
-
-        /* Rotate arrow on hover */
-        .hover-dropdown:hover .custom-arrow::after {
-            transform: rotate(180deg);
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            transform: scaleX(1);
         }
-
-        .dropdown-item.active {
-            background-color: #8c1515 !important;
-            /* red background */
-            color: #ffffff !important;
-            /* white text */
-            font-weight: 600;
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
         }
-
-        /* Ensure no blue default styles override it */
-        .dropdown-item:focus,
-        .dropdown-item:active {
-            background-color: #8c1515 !important;
-            color: #ffffff !important;
+        
+        .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            transition: all 0.2s ease;
         }
-
-        /* Dropdown item hover effect */
-        .dropdown-item:hover,
-        .dropdown-item:focus,
-        .dropdown-item:active {
-            background-color: #8c1515 !important;
-            /* red background */
-            color: #ffffff !important;
-            /* white text */
+        
+        .dropdown-item:hover, 
+        .dropdown-item:focus {
+            background-color: var(--primary-red);
+            color: white !important;
         }
-
+        
+        .dropdown-divider {
+            margin: 0.5rem 0;
+        }
 
         /* Hero Section */
         .hero-section {
@@ -123,19 +140,26 @@
             font-size: 3.5rem;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
         }
 
         /* Content Section */
         .content-section {
-            padding: 5rem 0;
+            padding: 4rem 0;
             position: relative;
             z-index: 2;
+        }
+        
+        .container {
+            max-width: 1140px;
+            padding-left: 15px;
+            padding-right: 15px;
         }
 
         .section-title {
             position: relative;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
         }
 
         .section-title:after {
@@ -152,7 +176,7 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-            padding: 2.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             transition: all 0.4s ease;
             border-left: 4px solid var(--primary-red);
@@ -181,7 +205,7 @@
 
         .timeline-item {
             position: relative;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .timeline-item:before {
@@ -197,21 +221,31 @@
             box-shadow: 0 0 0 2px var(--primary-red);
         }
 
-        /* Footer */
-        .footer {
-            border-top: 5px solid #ffc107;
-            background-color: var(--dark-grey);
-            color: white;
-            padding: 4rem 0 2rem;
-            position: relative;
+        /* Image styling */
+        .content-image {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.02);
         }
 
+        /* Footer */
+        .footer {
+            background-color: var(--dark-grey);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            border-top: 5px solid #ffc107;
+        }
 
         .footer-title {
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             position: relative;
-            padding-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
         }
 
         .footer-title:after {
@@ -254,11 +288,25 @@
             background: var(--primary-red);
             transform: translateY(-3px);
         }
+        
+        /* Selection color */
+        ::selection {
+            background-color: var(--primary-red);
+            color: white;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 992px) {
             .hero-title {
                 font-size: 2.8rem;
+            }
+            
+            .content-section {
+                padding: 3rem 0;
+            }
+            
+            .history-card {
+                padding: 1.5rem;
             }
         }
 
@@ -270,160 +318,129 @@
             .hero-section {
                 padding: 4rem 0;
             }
-
-            .content-section {
-                padding: 3rem 0;
+            
+            .navbar-brand .logo-text h1 {
+                font-size: 1rem;
+            }
+            
+            .navbar-brand .logo-text h2 {
+                font-size: 0.7rem;
+            }
+            
+            .navbar-brand img {
+                height: 50px !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
             }
         }
-        ::selection {
-            background-color: red;
-            color: white;
-        }
-        .dropdown-menu.custom-dropdown {
-            right: 0 !important;
-            left: auto !important;
-            margin-top: 0;
-            /* Remove default dropdown spacing if needed */
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-section {
+                padding: 3rem 0;
+            }
+            
+            .section-title:after {
+                width: 50px;
+            }
         }
         
-        /* Multi-level dropdown (right side) */
-        .dropdown-submenu .submenu {
-            top: 0;
-            left: 100%;
-            margin-left: 0.1rem;
-            display: none;
-            position: absolute;
-            border-radius: 0.375rem;
-            background-color: white;
-            z-index: 1050;
-        }
-        
-        .dropdown-submenu:hover>.submenu {
-            display: block;
-        }
-        
-        .dropdown-submenu>a::after {
-            content: "▶";
-            float: right;
-            margin-top: 5px;
-            font-size: 0.7rem;
-        }
-        
-        .submenu {
-            transition: all 0.2s ease;
-        }
-        
-        /* Submenu opens to the right */
+        /* Dropdown submenu styles */
         .dropdown-submenu {
             position: relative;
         }
         
-        .dropdown-submenu>.dropdown-item {
-            position: relative;
-        }
-        
-        .dropdown-submenu>.dropdown-item::after {
-            content: "▶";
-            position: absolute;
-            right: 10px;
-            font-size: 0.7rem;
-        }
-        
-        
-        /* Only show submenu when hovering on Management specifically */
         .dropdown-submenu .submenu {
             display: none;
             position: absolute;
-            top: 0;
             left: 100%;
-            margin-left: 0.2rem;
-            background: #fff;
-            min-width: 220px;
+            top: 0;
+            margin-left: 0.1rem;
+            background: white;
             border-radius: 0.375rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 220px;
             z-index: 1050;
         }
         
-        /* Show only when hovering directly on the .submenu-trigger */
-        .dropdown-submenu:hover>.submenu {
+        .dropdown-submenu:hover > .submenu {
             display: block;
-            opacity: 1;
-            font-size: visible;
         }
         
-        /* Optional: remove default caret */
-        .dropdown-submenu>a::after {
-            display: none;
+        .dropdown-submenu > a::after {
+            content: "›";
+            float: right;
+            margin-left: 0.5rem;
         }
         
-        /* Small subtle arrow to the right */
-        .submenu-trigger span {
-            font-size: 1rem;
-            color: #8C1515;
+        /* Mobile dropdown adjustments */
+        @media (max-width: 991.98px) {
+            .dropdown-submenu .submenu {
+                position: static;
+                margin-left: 1rem;
+                box-shadow: none;
+                border-left: 2px solid var(--primary-red);
+            }
+            
+            .dropdown-menu {
+                padding: 0.5rem 0;
+            }
+            
+            .dropdown-item {
+                padding: 0.5rem 1.5rem;
+            }
         }
-        /* Prevent submenus from showing automatically */
-        .dropdown-menu .dropdown-submenu .submenu {
-            display: none !important;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-          }
-          
-          /* Show submenu only when hovering directly on 'Management' */
-          .dropdown-menu .dropdown-submenu:hover > .submenu {
-            display: block !important;
-            opacity: 1;
-            visibility: visible;
-          }
-        
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <!-- Main Header -->
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-2">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.html">
                     <div class="d-flex align-items-center">
-                        <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px; margin-top: 10px;">
+                        <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px;">
                         <div class="logo-text">
                             <h1 class="mb-0">National Public School</h1>
                             <h2 class="mb-0 small">Shivamogga - since 2009</h2>
                         </div>
                     </div>
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
-    
-                        <!-- Dropdown -->
-                        <li class="nav-item dropdown hover-dropdown" >
-                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+
+                        <!-- About School Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 About School
                             </a>
-                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="nes.html">NES Shivamogga</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdownNav">
+                                <li><a class="dropdown-item active" href="nes.html">NES Shivamogga</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="nps.html">NPS</a></li>
                                 <li><a class="dropdown-item" href="vission-mission.html">Vision & Mission</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="principal-desk.html">Principal's Desk</a></li>
-                                <!-- Management Submenu (inside About School dropdown) -->
+                                <!-- Management Submenu -->
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">
-                                    Management
-                                    <span class="ms-2 small">&rsaquo;</span>
+                                        Management
                                     </a>
                                     <ul class="dropdown-menu submenu">
                                         <li><a class="dropdown-item" href="president.html">President's Message</a></li>
@@ -436,15 +453,17 @@
                                 <li><a class="dropdown-item" href="cbse-affiliation.html">CBSE Affiliation</a></li>
                             </ul>
                         </li>
-    
+
                         <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
-                        <li class="nav-item dropdown hover-dropdown" >
-                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+                        
+                        <!-- Academics Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="academicsDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Academics
                             </a>
-                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="admissions.html">Admissions</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="academicsDropdownNav">
+                                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="programs.html">Programs</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -453,19 +472,23 @@
                                 <li><a class="dropdown-item" href="alumniform.html">Alumni - Registration form</a></li>
                             </ul>
                         </li>
+                        
                         <li class="nav-item"><a class="nav-link" href="facilities.html">Facilities</a></li>
-                        <li class="nav-item dropdown hover-dropdown" >
-                            <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
+                        
+                        <!-- Gallery Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="galleryDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Gallery
                             </a>
-                            <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="adyayan.html">Adhyayan</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="galleryDropdownNav">
+                                <li><a class="dropdown-item" href="adyayan.html">Adhyayan</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="photogallery.html">Photo Gallery</a></li>
                                 <li><a class="dropdown-item" href="videogallery.html">Video Gallery</a></li>
                             </ul>
                         </li>
+                        
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
@@ -476,20 +499,19 @@
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
         <div class="container text-center position-relative z-index-2">
-            <h1 class="hero-title animate_animated animate_fadeInDown">Nes Overview</h1>
-            <p class="lead animate_animated animatefadeInUp animate_delay-1s"> Empowers students through value-based education, fostering holistic growth and community contribution.</p>
+            <h1 class="hero-title animate__animated animate__fadeInDown">NES Overview</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Empowers students through value-based education, fostering holistic growth and community contribution.</p>
         </div>
     </section>
-
 
     <!-- Main Content -->
     <section class="content-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="history-card animate_animated animate_fadeIn" data-aos="fade-up">
+                    <div class="history-card animate__animated animate__fadeIn" data-aos="fade-up">
                         <h2 class="section-title">About National Education Society, Shivamogga</h2>
-                         <p>The Society with the zeal and dedication of senior leaders of the district like Mr. S.
+                        <p>The Society with the zeal and dedication of senior leaders of the district like Mr. S.
                             Vidyaranaya Murthy, Ex. Deputy Speaker of Lok Sabha, Mr. S. R. Kanthi Rajappa, Former
                             Minister of Karnataka, Mr. Mundkur Raghavendra Rao, Mr. S. E. Jayaram Shetty and Mr. S.
                             Brahmananda Murthy, Senior Advocates, Mr. S. Narayana Rao, Senior, and a general public who
@@ -499,20 +521,15 @@
                             education institutions opened the first Girls High School in the district in 1954 and
                             gradually opened educational institutions in and around of the district to retain the needs
                             of rural people.</p>
-                    </div>
-                    <section class="content-section py-5">
-                        <div class="container">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-md-10 col-lg-10">
-                                    <div class="ratio ratio-16x9">
-                                        <img src="images/NES/nes.jpeg" class="img-fluid rounded shadow-sm zoom-hover"
-                                            alt="School Building">
-                                    </div>
-                                </div>
+                            
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <img src="images/NES/nes.jpeg" class="img-fluid rounded shadow content-image" alt="NES Shivamogga">
                             </div>
                         </div>
-                    </section>
-                    <div class="history-card animate_animated animatefadeIn animate_delay-1s" data-aos="fade-up">
+                    </div>
+
+                    <div class="history-card animate__animated animate__fadeIn animate__delay-1s" data-aos="fade-up">
                         <h3 class="section-title">Historical Milestones</h3>
                         <div class="timeline">
                             <div class="timeline-item" data-aos="fade-right">
@@ -535,7 +552,7 @@
                         </div>
                     </div>
 
-                    <div class="history-card animate_animated animatefadeIn animate_delay-2s" data-aos="fade-up">
+                    <div class="history-card animate__animated animate__fadeIn animate__delay-2s" data-aos="fade-up">
                         <h3 class="section-title">Our Distinguished Visitors</h3>
                         <p>Many eminent leaders and administrators have visited the National Education Society and have
                             blessed by appreciating the dedicated service of the Society. Among them are Dr. Rajendra
@@ -549,59 +566,59 @@
         </div>
     </section>
 
-    <footer class="footer text-white py-5" style="background-color: #111; border-top: 5px solid #ffc107;">
+    <!-- Footer -->
+    <footer class="footer text-white">
         <div class="container">
-          <div class="row gy-4 justify-content-center">
-            <!-- About -->
-            <div class="col-lg-4 col-md-6">
-              <h5 class="text-warning mb-3">Global Academy</h5>
-              <p class="text-white-50">Providing world-class education since 1995. We nurture curious, knowledgeable, and caring young people to build a better world.</p>
-              <div class="d-flex gap-3 mt-3">
-                <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/nps_shivamogga" class="text-white"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://youtube.com/@nationalpublicschoolshivam1377" class="text-white"><i class="fab fa-youtube"></i></a>
-              </div>
+            <div class="row gy-4 justify-content-center">
+                <!-- About -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-warning mb-3">National Public School</h5>
+                    <p class="text-white-50">Providing quality education since 2009. We nurture curious, knowledgeable, and caring young people to build a better world.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/nps_shivamogga" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://youtube.com/@nationalpublicschoolshivam1377" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-warning mb-3">Quick Links</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li><a href="index.html" class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
+                        <li><a href="nps.html" class="text-white-50 text-decoration-none d-block mb-2">About School</a></li>
+                        <li><a href="magazine.html" class="text-white-50 text-decoration-none d-block mb-2">Magazine</a></li>
+                        <li><a href="academics.html" class="text-white-50 text-decoration-none d-block mb-2">Academics</a></li>
+                        <li><a href="facilities.html" class="text-white-50 text-decoration-none d-block mb-2">Facilities</a></li>
+                        <li><a href="gallery.html" class="text-white-50 text-decoration-none d-block mb-2">Gallery</a></li>
+                        <li><a href="contact.html" class="text-white-50 text-decoration-none d-block mb-2">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-warning mb-3">Contact Us</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-warning"></i> 5th Cross, Sheshadripuram, Shivamogga, Karnataka 577201</li>
+                        <li class="mb-2"><i class="fas fa-phone-alt me-2 text-warning"></i> 9019174325, 7676618762</li>
+                        <li><i class="fas fa-envelope me-2 text-warning"></i> npsshivamogga@gmail.com</li>
+                    </ul>
+                </div>
             </div>
-      
-            <!-- Quick Links (centered) -->
-            <div class="col-lg-3 col-md-6 mx-auto text-center">
-              <h5 class="text-warning mb-3">Quick Links</h5>
-              <ul class="list-unstyled text-white-50">
-                <li><a href="index.html" class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
-                <li><a href="nps.html" class="text-white-50 text-decoration-none d-block mb-2">About School</a></li>
-                <li><a href="magazine.html" class="text-white-50 text-decoration-none d-block mb-2">Magazine</a></li>
-                <li><a href="academics.html" class="text-white-50 text-decoration-none d-block mb-2">Academics</a></li>
-                <li><a href="facilities.html" class="text-white-50 text-decoration-none d-block mb-2">Facilities</a></li>
-                <li><a href="gallery.html" class="text-white-50 text-decoration-none d-block mb-2">Gallery</a></li>
-                <li><a href="contact.html" class="text-white-50 text-decoration-none d-block mb-2">Contact Us</a></li>
-              </ul>
+
+            <!-- Footer Bottom -->
+            <hr class="my-4 bg-secondary">
+            <div class="text-center">
+                <p class="mb-0 text-white-50 small">
+                    &copy; <span id="currentYear"></span> NPS Shivamogga. All Rights Reserved.
+                    | <a href="#" class="text-white-50">Privacy Policy</a>
+                    | <a href="#" class="text-white-50">Terms of Service</a>
+                </p>
             </div>
-      
-            <!-- Contact -->
-            <div class="col-lg-4 col-md-6">
-              <h5 class="text-warning mb-3">Contact Us</h5>
-              <ul class="list-unstyled text-white-50">
-                <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-warning"></i> 5th Cross, Sheshadripuram, Shivamogga, Karnataka 577201</li>
-                <li class="mb-2"><i class="fas fa-phone-alt me-2 text-warning"></i> 9019174325, 7676618762</li>
-                <li><i class="fas fa-envelope me-2 text-warning"></i> npsshivamogga@gmail.com</li>
-              </ul>
-            </div>
-          </div>
-      
-          <!-- Footer Bottom -->
-          <hr class="my-4 bg-secondary">
-          <div class="text-center">
-            <p class="mb-0 text-white-50 small">
-              &copy; <span id="currentYear"></span> NPS Shivamogga. All Rights Reserved.
-              | <a href="#" class="text-white-50">Privacy Policy</a>
-              | <a href="#" class="text-white-50">Terms of Service</a>
-            </p>
-          </div>
         </div>
     </footer>
-
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -616,55 +633,53 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Staggered animations for nav items
-        document.addEventListener('DOMContentLoaded', function () {
-            const navItems = document.querySelectorAll('[data-delay]');
-            navItems.forEach(item => {
-                const delay = item.getAttribute('data-delay');
-                item.style.animationDelay = delay + 'ms';
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 100) {
-                    document.querySelector('.navbar').style.padding = '0.5rem 0';
-                } else {
-                    document.querySelector('.navbar').style.padding = '1rem 0';
-                }
-            });
-        });
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Initialize animations on page load for users who don't move mouse immediately
-        setTimeout(triggerAnimations, 1000);
-        window.addEventListener("scroll", function () {
-            const navbar = document.getElementById("mainNavbar");
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
+                navbar.classList.add('scrolled');
+                navbar.style.padding = '0.5rem 0';
             } else {
-                navbar.classList.remove("scrolled");
+                navbar.classList.remove('scrolled');
+                navbar.style.padding = '1rem 0';
             }
         });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          document.querySelectorAll('.hover-dropdown').forEach(function (dropdown) {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            const menu = dropdown.querySelector('.dropdown-menu');
-      
-            dropdown.addEventListener('mouseenter', function () {
-              dropdown.classList.add('show');
-              toggle.classList.add('show');
-              menu.classList.add('show');
+
+        // Initialize dropdown submenus
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile dropdown behavior
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        const parent = this.parentElement;
+                        const menu = this.nextElementSibling;
+                        
+                        if (menu.classList.contains('show')) {
+                            menu.classList.remove('show');
+                            this.setAttribute('aria-expanded', 'false');
+                        } else {
+                            menu.classList.add('show');
+                            this.setAttribute('aria-expanded', 'true');
+                        }
+                    }
+                });
             });
-      
-            dropdown.addEventListener('mouseleave', function () {
-              dropdown.classList.remove('show');
-              toggle.classList.remove('show');
-              menu.classList.remove('show');
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.matches('.dropdown-toggle') && !e.target.closest('.dropdown-menu')) {
+                    const openMenus = document.querySelectorAll('.dropdown-menu.show');
+                    openMenus.forEach(menu => {
+                        menu.classList.remove('show');
+                        const toggle = menu.previousElementSibling;
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
             });
-          });
         });
     </script>
     <script src="assets/js/main.js"></script>
