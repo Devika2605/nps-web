@@ -22,7 +22,6 @@
     <style>
         :root {
             --primary-red: #8C1515;
-            /* Stanford Cardinal Red */
             --secondary-red: #B1040E;
             --light-beige: #F4F4F0;
             --cool-grey: #4D4F53;
@@ -47,24 +46,19 @@
             color: var(--primary-red);
         }
 
-        /*navigation bar*/
-        /* Transparent & Stylish Dropdown */
-
-        /* Dropdown items hover */
+        /* Navigation Bar */
         .dropdown-item:hover {
             background-color: rgba(140, 21, 21, 0.1);
             color: #8c1515;
             font-weight: 500;
         }
 
-        /* Active Item in Red */
         .dropdown-item.active {
             color: #fff;
             background-color: #8c1515;
             font-weight: bold;
         }
 
-        /* Rotate arrow on hover */
         .hover-dropdown:hover .custom-arrow::after {
             transform: rotate(180deg);
         }
@@ -75,15 +69,6 @@
             font-weight: 600;
         }
 
-        /* Ensure no blue default styles override it */
-        .dropdown-item:focus,
-        .dropdown-item:active {
-            background-color: #8c1515 !important;
-            color: #ffffff !important;
-        }
-
-        /* Dropdown item hover effect */
-        .dropdown-item:hover,
         .dropdown-item:focus,
         .dropdown-item:active {
             background-color: #8c1515 !important;
@@ -126,6 +111,21 @@
             z-index: 2;
         }
 
+        /* Container Alignment */
+        .container-aligned {
+            max-width: 1200px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 1400px) {
+            .container-aligned {
+                max-width: 1320px;
+            }
+        }
+
         .section-title {
             position: relative;
             margin-bottom: 2.5rem;
@@ -161,34 +161,99 @@
         .facility-card {
             margin-bottom: 2rem;
             transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .facility-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .facility-img-container {
+            overflow: hidden;
+            position: relative;
+            flex-grow: 1;
         }
 
         .facility-img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 8px 8px 0 0;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: zoom-in;
         }
 
         .facility-card:hover .facility-img {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .facility-body {
             background: white;
             padding: 1.5rem;
-            border-radius: 0 0 8px 8px;
             border-left: 4px solid var(--primary-red);
         }
 
         .facility-title {
             color: var(--primary-red);
             margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: var(--primary-red);
+            transform: rotate(90deg);
         }
 
         /* Footer */
@@ -217,41 +282,14 @@
             background: white;
         }
 
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            margin-right: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: var(--primary-red);
-            transform: translateY(-3px);
-        }
-
         /* Responsive Adjustments */
         @media (max-width: 992px) {
             .hero-title {
                 font-size: 2.8rem;
+            }
+            
+            .facility-img {
+                height: 200px;
             }
         }
 
@@ -271,11 +309,32 @@
             .facility-img {
                 height: 180px;
             }
+            
+            .history-card {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
             .facility-img {
-                height: 150px;
+                height: 160px;
+            }
+            
+            .facility-body {
+                padding: 1rem;
+            }
+            
+            .section-title:after {
+                width: 60px;
+                height: 3px;
             }
         }
 
@@ -283,14 +342,14 @@
             background-color: red;
             color: white;
         }
+        
+        /* Multi-level dropdown */
         .dropdown-menu.custom-dropdown {
             right: 0 !important;
             left: auto !important;
             margin-top: 0;
-            /* Remove default dropdown spacing if needed */
         }
         
-        /* Multi-level dropdown (right side) */
         .dropdown-submenu .submenu {
             top: 0;
             left: 100%;
@@ -317,7 +376,6 @@
             transition: all 0.2s ease;
         }
         
-        /* Submenu opens to the right */
         .dropdown-submenu {
             position: relative;
         }
@@ -333,8 +391,6 @@
             font-size: 0.7rem;
         }
         
-        
-        /* Only show submenu when hovering on Management specifically */
         .dropdown-submenu .submenu {
             display: none;
             position: absolute;
@@ -348,37 +404,33 @@
             z-index: 1050;
         }
         
-        /* Show only when hovering directly on the .submenu-trigger */
         .dropdown-submenu:hover>.submenu {
             display: block;
             opacity: 1;
             font-size: visible;
         }
         
-        /* Optional: remove default caret */
         .dropdown-submenu>a::after {
             display: none;
         }
         
-        /* Small subtle arrow to the right */
         .submenu-trigger span {
             font-size: 1rem;
             color: #8C1515;
         }
-        /* Prevent submenus from showing automatically */
+        
         .dropdown-menu .dropdown-submenu .submenu {
             display: none !important;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
-          }
+        }
           
-          /* Show submenu only when hovering directly on 'Management' */
-          .dropdown-menu .dropdown-submenu:hover > .submenu {
+        .dropdown-menu .dropdown-submenu:hover > .submenu {
             display: block !important;
             opacity: 1;
             visibility: visible;
-          }
+        }
     </style>
 </head>
 
@@ -386,7 +438,7 @@
     <!-- Navigation -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-3">
-            <div class="container">
+            <div class="container-aligned">
                 <a class="navbar-brand" href="#">
                     <div class="d-flex align-items-center">
                         <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px; margin-top: 10px;">
@@ -409,20 +461,20 @@
                         </li>
     
                         <!-- Dropdown -->
-                        <li class="nav-item dropdown hover-dropdown" >
+                        <li class="nav-item dropdown hover-dropdown">
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 About School
                             </a>
                             <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="nes.html">NES Shivamogga</a></li>
+                                <li><a class="dropdown-item" href="nes.html">NES Shivamogga</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="nps.html">NPS</a></li>
                                 <li><a class="dropdown-item" href="vission-mission.html">Vision & Mission</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="principal-desk.html">Principal's Desk</a></li>
-                                 <!-- Management Submenu (inside About School dropdown) -->
-                                 <li class="dropdown-submenu">
+                                <!-- Management Submenu -->
+                                <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">
                                     Management
                                     <span class="ms-2 small">&rsaquo;</span>
@@ -440,13 +492,13 @@
                         </li>
     
                         <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
-                        <li class="nav-item dropdown hover-dropdown" >
+                        <li class="nav-item dropdown hover-dropdown">
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Academics
                             </a>
                             <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="admissions.html">Admissions</a></li>
+                                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="programs.html">Programs</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -455,14 +507,14 @@
                                 <li><a class="dropdown-item" href="alumniform.html">Alumni - Registration form</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="facilities.html">Facilities</a></li>
-                        <li class="nav-item dropdown hover-dropdown" >
+                        <li class="nav-item"><a class="nav-link active" href="facilities.html">Facilities</a></li>
+                        <li class="nav-item dropdown hover-dropdown">
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Gallery
                             </a>
                             <ul class="dropdown-menu custom-dropdown" aria-labelledby="aboutDropdownNav">
-                                <li><a class="dropdown-item " href="adyayan.html">Adhyayan</a></li>
+                                <li><a class="dropdown-item" href="adyayan.html">Adhyayan</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="photogallery.html">Photo Gallery</a></li>
                                 <li><a class="dropdown-item" href="videogallery.html">Video Gallery</a></li>
@@ -477,17 +529,17 @@
 
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
-        <div class="container text-center position-relative z-index-2">
-            <h1 class="hero-title animate__animated animate__fadeInDown">Our Facilities</h1>
-            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">World-class infrastructure for holistic development</p>
+        <div class="container-aligned text-center position-relative z-index-2">
+            <h1 class="hero-title animate_animated animate_fadeInDown">Our Facilities</h1>
+            <p class="lead animate_animated animatefadeInUp animate_delay-1s">World-class infrastructure for holistic development</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="content-section">
-        <div class="container">
+        <div class="container-aligned">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
+                <div class="col-12">
                     <div class="history-card" data-aos="fade-up">
                         <h2 class="section-title">Modern Facilities</h2>
                         <p>Equipped with cutting-edge ATL labs, glass room innovations, digital learning spaces, Kadamba Ranga Mandira, skating arena, and seamless transport—our campus harmoniously blends excellence, creativity, and comfort for holistic growth.</p>
@@ -496,19 +548,23 @@
                     <!-- ATL Labs Section -->
                     <div class="history-card" data-aos="fade-up">
                         <h3 class="section-title">ATL Labs</h3>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/ATL-LAB-1.jpg" alt="ATL Lab 1" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/ATL-LAB-1.jpg" alt="ATL Lab 1" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">ATL LAB 1</h4>
                                         <p>ATL Lab fosters innovation, hands-on learning, and creativity through cutting-edge tools and technology.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/ATL-LAB-2.jpg" alt="ATL Lab 2" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/ATL-LAB-2.jpg" alt="ATL Lab 2" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">ATL LAB 2</h4>
                                         <p>It inspires future leaders by cultivating design thinking, problem-solving, and tech-driven curiosity.</p>
@@ -521,19 +577,23 @@
                     <!-- Transportation Section -->
                     <div class="history-card" data-aos="fade-up">
                         <h3 class="section-title">Features</h3>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/BUS-PLATFORM.jpg" alt="School Bus" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/BUS-PLATFORM.jpg" alt="School Bus" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">School Bus</h4>
                                         <p>The bus facility ensures safe, punctual, and comfortable transportation with clear routes, safety measures, and communication.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/ADMIN-BLOCK.jpg" alt="Admin Block" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/ADMIN-BLOCK.jpg" alt="Admin Block" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">ADMIN BLOCK</h4>
                                         <p>The admin block houses essential offices, provides administrative support, and manages school operations efficiently.</p>
@@ -546,28 +606,34 @@
                     <!-- Glass Room Section -->
                     <div class="history-card" data-aos="fade-up">
                         <h3 class="section-title">Activities</h3>
-                        <div class="row">
-                            <div class="col-md-4 mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/Field-Trip-educational-tour.jpg" alt="Field Trip" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/Field-Trip-educational-tour.jpg" alt="Field Trip" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">Field Trip</h4>
                                         <p>Educational tours that provide practical learning experiences beyond classrooms.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/SAMRT-CLASS-2.jpg" alt="Kardio Glass" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/SAMRT-CLASS-2.jpg" alt="Kardio Glass" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">Kardio Glass</h4>
                                         <p>Special glass-enclosed cardio zone for physical fitness activities.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/FUN-N-FROLIC-ZONE-1.jpg" alt="Fun Zone" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/FUN-N-FROLIC-ZONE-1.jpg" alt="Fun Zone" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">FUN N FROLIC ZONE</h4>
                                         <p>Recreational area designed for fun and relaxation for our students.</p>
@@ -580,85 +646,103 @@
                     <!-- Additional Facilities Section -->
                     <div class="history-card" data-aos="fade-up">
                         <h3 class="section-title">Additional Facilities</h3>
-                        <div class="row">
-                            <div class="col-md-4 mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/COMPUTER-LAB.jpg" alt="Computer Lab" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/COMPUTER-LAB.jpg" alt="Computer Lab" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">Computer Labs</h4>
                                         <p>Well-equipped computer labs with modern hardware and software for digital learning.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/LIBRARY.jpg" alt="Library" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/LIBRARY.jpg" alt="Library" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">Library</h4>
                                         <p>Extensive collection of books, periodicals, and digital resources for research and reading.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/SCIENCE-LAB-1.jpg" alt="Swimming Pool" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/SCIENCE-LAB-1.jpg" alt="Science Lab" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
-                                        <h4 class="facility-title">SCIENCE-LAB</h4>
+                                        <h4 class="facility-title">SCIENCE LAB</h4>
                                         <p>The science lab with well-equipped space for hands-on learning, encouraging exploration and discovery.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/INDOOR-GAMES.jpg" alt="Karate Classes" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/INDOOR-GAMES.jpg" alt="Indoor Games" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">INDOOR-GAMES</h4>
                                         <p>Martial arts training for physical fitness and self-defense skills.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/SCHOOL-CANTEEN.jpg" alt="Dance Classes" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/SCHOOL-CANTEEN.jpg" alt="School Canteen" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">SCHOOL-CANTEEN</h4>
                                         <p>The school canteen that offers healthy, varied meals and snacks in a clean, social environment.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/KADAMBA-RANGA-MANDIRA.jpg" alt="Library" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/KADAMBA-RANGA-MANDIRA.jpg" alt="Kadamba Ranga Mandira" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">KADAMBA-RANGA-MANDIRA</h4>
                                         <p>With a vibrant venue, blending tradition and innovation for unforgettable cultural experiences.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/Skating-Class.jpg" alt="Library" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/Skating-Class.jpg" alt="Skating Class" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">Skating-Class</h4>
                                         <p>Provides expert guidance, focusing on skill development, safety, and confidence building.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/VOLLEY-BALL.jpg" alt="Library" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/VOLLEY-BALL.jpg" alt="Volleyball" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">VOLLEY-BALL</h4>
                                         <p>A vibrant arena where teamwork, skill, and energy come together for thrilling action.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4">
                                 <div class="facility-card">
-                                    <img src="images/Facilities/RECREATIONAL-HALL.jpg" alt="Music Classes" class="facility-img">
+                                    <div class="facility-img-container">
+                                        <img src="images/Facilities/RECREATIONAL-HALL.jpg" alt="Recreational Hall" class="facility-img">
+                                    </div>
                                     <div class="facility-body">
                                         <h4 class="facility-title">RECREATIONAL-HALL</h4>
-                                        <p>The recreational hall , a lively space designed for relaxation, creativity, and joyful student engagement.</p>
+                                        <p>The recreational hall, a lively space designed for relaxation, creativity, and joyful student engagement.</p>
                                     </div>
                                 </div>
                             </div>
@@ -669,8 +753,14 @@
         </div>
     </section>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightboxModal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-img" id="lightboxImage" src="" alt="Facility Image">
+    </div>
+
     <footer class="footer text-white py-5" style="background-color: #111; border-top: 5px solid #ffc107;">
-        <div class="container">
+        <div class="container-aligned">
           <div class="row gy-4 justify-content-center">
             <!-- About -->
             <div class="col-lg-4 col-md-6">
@@ -735,82 +825,76 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Staggered animations for nav items
-        document.addEventListener('DOMContentLoaded', function () {
-            const navItems = document.querySelectorAll('[data-delay]');
-            navItems.forEach(item => {
-                const delay = item.getAttribute('data-delay');
-                item.style.animationDelay = delay + 'ms';
-            });
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 100) {
+                document.querySelector('.navbar').style.padding = '0.5rem 0';
+            } else {
+                document.querySelector('.navbar').style.padding = '1rem 0';
+            }
+        });
 
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 100) {
-                    document.querySelector('.navbar').style.padding = '0.5rem 0';
-                } else {
-                    document.querySelector('.navbar').style.padding = '1rem 0';
+        // Lightbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightboxModal');
+            const lightboxImg = document.getElementById('lightboxImage');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const facilityImages = document.querySelectorAll('.facility-img');
+            
+            // Open lightbox when clicking on facility images
+            facilityImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    lightboxImg.src = this.src;
+                    lightboxImg.alt = this.alt;
+                    lightbox.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox
+            closeBtn.addEventListener('click', function() {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+                    lightbox.classList.remove('show');
+                    document.body.style.overflow = 'auto';
                 }
             });
         });
 
-        // Initialize animations on page load for users who don't move mouse immediately
-        setTimeout(triggerAnimations, 1000);
-        window.addEventListener("scroll", function () {
-            const navbar = document.getElementById("mainNavbar");
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
+        // Dropdown hover functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.hover-dropdown').forEach(function (dropdown) {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                const menu = dropdown.querySelector('.dropdown-menu');
+          
+                dropdown.addEventListener('mouseenter', function () {
+                    dropdown.classList.add('show');
+                    toggle.classList.add('show');
+                    menu.classList.add('show');
+                });
+          
+                dropdown.addEventListener('mouseleave', function () {
+                    dropdown.classList.remove('show');
+                    toggle.classList.remove('show');
+                    menu.classList.remove('show');
+                });
+            });
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          document.querySelectorAll('.hover-dropdown').forEach(function (dropdown) {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            const menu = dropdown.querySelector('.dropdown-menu');
-      
-            dropdown.addEventListener('mouseenter', function () {
-              dropdown.classList.add('show');
-              toggle.classList.add('show');
-              menu.classList.add('show');
-            });
-      
-            dropdown.addEventListener('mouseleave', function () {
-              dropdown.classList.remove('show');
-              toggle.classList.remove('show');
-              menu.classList.remove('show');
-            });
-          });
-        });
-      </script>
-      <div id="lightbox" class="d-none position-fixed top-0 start-0 w-100 h-100 bg-black bg-opacity-75 d-flex justify-content-center align-items-center" style="z-index:9999;cursor:pointer">
-        <img id="lightboxImg" class="img-fluid rounded" style="max-height:90%;max-width:90%">
-      </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const lb = document.getElementById('lightbox'), img = document.getElementById('lightboxImg');
-          document.querySelectorAll('img.facility-img, img.activity-img, img.result-image, img.vision-mission-img').forEach(i => {
-            i.style.cursor = 'zoom-in';
-            i.onclick = () => {
-              sessionStorage.setItem('scrollY', window.scrollY);
-              img.src = i.src;
-              lb.classList.remove('d-none');
-            };
-          });
-          lb.onclick = () => {
-            lb.classList.add('d-none');
-            history.back();
-          };
-          const y = sessionStorage.getItem('scrollY');
-          if (y) {
-            window.scrollTo(0, +y);
-            sessionStorage.removeItem('scrollY');
-          }
-        });
-        </script>
-        <script src="assets/js/main.js"></script>
-              
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
