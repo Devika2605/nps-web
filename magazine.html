@@ -34,6 +34,8 @@
             background-color: var(--light-beige);
             color: var(--dark-grey);
             line-height: 1.8;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         h1,
@@ -113,7 +115,7 @@
 
         /* Content Section */
         .content-section {
-            padding: 5rem 0;
+            padding: 4rem 0;
             position: relative;
             z-index: 2;
         }
@@ -266,57 +268,13 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .pdf-container {
-                padding-bottom: 141.42%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-section {
-                padding: 4rem 0;
-            }
-
-            .content-section {
-                padding: 3rem 0;
-            }
-            
-            .pdf-thumbnail {
-                height: 180px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .pdf-thumbnail {
-                height: 150px;
-            }
-            
-            .pdf-container {
-                padding-bottom: 141.42%;
-            }
-        }
-
-        ::selection {
-            background-color: red;
-            color: white;
-        }
+        /* Dropdown Menu Enhancements */
         .dropdown-menu.custom-dropdown {
             right: 0 !important;
             left: auto !important;
             margin-top: 0;
-            /* Remove default dropdown spacing if needed */
         }
         
-        /* Multi-level dropdown (right side) */
         .dropdown-submenu .submenu {
             top: 0;
             left: 100%;
@@ -343,7 +301,6 @@
             transition: all 0.2s ease;
         }
         
-        /* Submenu opens to the right */
         .dropdown-submenu {
             position: relative;
         }
@@ -358,7 +315,6 @@
             right: 10px;
             font-size: 0.7rem;
         }
-        
         
         /* Only show submenu when hovering on Management specifically */
         .dropdown-submenu .submenu {
@@ -397,14 +353,129 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
-          }
+        }
           
-          /* Show submenu only when hovering directly on 'Management' */
-          .dropdown-menu .dropdown-submenu:hover > .submenu {
+        /* Show submenu only when hovering directly on 'Management' */
+        .dropdown-menu .dropdown-submenu:hover > .submenu {
             display: block !important;
             opacity: 1;
             visibility: visible;
-          }
+        }
+
+        /* Selection */
+        ::selection {
+            background-color: red;
+            color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1140px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .pdf-container {
+                padding-bottom: 141.42%;
+            }
+
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+            
+            .pdf-thumbnail {
+                height: 180px;
+            }
+
+            .container {
+                max-width: 720px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .navbar-brand .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-brand .logo-text h2 {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .pdf-thumbnail {
+                height: 150px;
+            }
+            
+            .pdf-container {
+                padding-bottom: 141.42%;
+            }
+
+            .container {
+                max-width: 540px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        /* Mobile View Fixes */
+        @media (max-width: 768px) {
+            .dropdown-menu.submenu {
+                position: absolute;
+                right: 0;
+                left: auto;
+                transform: none;
+                margin-top: 0.5rem;
+                border: 1px solid rgba(0,0,0,.15);
+            }
+            
+            .dropdown-item {
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .dropdown-menu.submenu .dropdown-item {
+                white-space: normal;
+                word-wrap: break-word;
+            }
+
+            .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                width: 100%;
+            }
+            
+            .dropdown-submenu .submenu {
+                position: relative !important;
+                left: 0 !important;
+                width: 100%;
+                box-shadow: none;
+            }
+        }
     </style>
 </head>
 
@@ -453,10 +524,12 @@
                                     Management
                                     <span class="ms-2 small">&rsaquo;</span>
                                     </a>
-                                    <ul class="dropdown-menu submenu">
-                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
-                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
-                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                    <ul class="dropdown-menu submenu shadow-lg" style="min-width: 250px;">
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="president.html">President's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="secretary.html">Secretary's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="directors.html">Board of Directors</a></li>
                                     </ul>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
@@ -465,7 +538,7 @@
                             </ul>
                         </li>
     
-                        <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="magazine.html">Magazine</a></li>
                         <li class="nav-item dropdown hover-dropdown" >
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -521,7 +594,20 @@
 
                     <!-- Magazine 2023 -->
                     <div class="magazine-card animate__animated animate__fadeIn animate__delay-1s" data-aos="fade-up">
-                        <h3 class="section-title">Creative Echoes</h3>
+                        <h3 class="section-title">Creative Echoes - 2023</h3>
+                        <div class="row align-items-center">
+                            <div class="col-md-5 mb-4 mb-md-0">
+                                <img src="images/magazine-thumbnails/magazine-2023.jpg" alt="Magazine 2023 Cover" class="pdf-thumbnail img-fluid">
+                            </div>
+                            <div class="col-md-7">
+                                <h5 class="mb-2">"Creative Echoes"</h5>
+                                <p class="mb-3">A vibrant collection showcasing student creativity, academic achievements, and school events from the 2022-2023 academic session.</p>
+                                <a href="magazines/magazine-2023.pdf" class="download-btn" download>
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Magazine 2022 -->
                     <div class="magazine-card animate__animated animate__fadeIn animate__delay-2s" data-aos="fade-up">
@@ -531,8 +617,24 @@
                             </div>
                             <div class="col-md-7">
                                 <h5 class="mb-2">"Voyage of Discovery"</h5>
-                                <p class="mb-3">A compilation of student writings, artwork, and school events from all academic session.</p>
+                                <p class="mb-3">A compilation of student writings, artwork, and school events from the 2021-2022 academic session.</p>
                                 <a href="magazines/magazine-2022.pdf" class="download-btn" download>
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Magazine 2021 -->
+                    <div class="magazine-card animate__animated animate__fadeIn animate__delay-3s" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-md-5 mb-4 mb-md-0">
+                                <img src="images/magazine-thumbnails/magazine-2021.jpg" alt="Magazine 2021 Cover" class="pdf-thumbnail img-fluid">
+                            </div>
+                            <div class="col-md-7">
+                                <h5 class="mb-2">"Resilience & Hope"</h5>
+                                <p class="mb-3">Documenting our journey through challenging times with creativity and determination during the 2020-2021 academic session.</p>
+                                <a href="magazines/magazine-2021.pdf" class="download-btn" download>
                                     <i class="fas fa-download"></i> Download PDF
                                 </a>
                             </div>
