@@ -34,6 +34,8 @@
             background-color: var(--light-beige);
             color: var(--dark-grey);
             line-height: 1.8;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         h1,
@@ -111,18 +113,18 @@
             z-index: 2;
         }
 
-        /* Container Alignment */
+        /* Container Alignment - Slightly smaller than default */
         .container-aligned {
-            max-width: 1200px;
-            padding-left: 20px;
-            padding-right: 20px;
+            max-width: 1140px;
+            padding-left: 15px;
+            padding-right: 15px;
             margin-left: auto;
             margin-right: auto;
         }
 
         @media (min-width: 1400px) {
             .container-aligned {
-                max-width: 1320px;
+                max-width: 1200px;
             }
         }
 
@@ -202,6 +204,36 @@
             color: var(--primary-red);
             margin-bottom: 0.5rem;
             font-weight: 700;
+        }
+
+        /* Section Navigation */
+        .section-nav {
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+        
+        .section-nav .nav-link {
+            color: var(--dark-grey);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .section-nav .nav-link:hover,
+        .section-nav .nav-link.active {
+            color: white;
+            background-color: var(--primary-red);
+        }
+        
+        .section-nav .nav-link i {
+            margin-right: 8px;
         }
 
         /* Lightbox Styles */
@@ -291,6 +323,10 @@
             .facility-img {
                 height: 200px;
             }
+            
+            .section-nav {
+                top: 80px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -317,6 +353,11 @@
             .section-title {
                 font-size: 1.5rem;
             }
+            
+            .section-nav {
+                position: static;
+                margin-bottom: 1.5rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -335,6 +376,11 @@
             .section-title:after {
                 width: 60px;
                 height: 3px;
+            }
+            
+            .section-nav .nav-link {
+                padding: 0.5rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -430,6 +476,34 @@
             display: block !important;
             opacity: 1;
             visibility: visible;
+        }
+        
+        /* Mobile-specific dropdown fixes */
+        @media (max-width: 768px) {
+            .dropdown-menu.submenu {
+                position: absolute;
+                right: 0;
+                left: auto;
+                transform: none;
+                margin-top: 0.5rem;
+                border: 1px solid rgba(0,0,0,.15);
+            }
+            
+            .dropdown-item {
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .dropdown-menu.submenu .dropdown-item {
+                white-space: normal;
+                word-wrap: break-word;
+            }
+            
+            .dropdown-submenu .submenu {
+                position: relative !important;
+                left: 0 !important;
+                width: 100%;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
@@ -530,23 +604,36 @@
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
         <div class="container-aligned text-center position-relative z-index-2">
-            <h1 class="hero-title animate_animated animate_fadeInDown">Our Facilities</h1>
-            <p class="lead animate_animated animatefadeInUp animate_delay-1s">World-class infrastructure for holistic development</p>
+            <h1 class="hero-title animate__animated animate__fadeInDown">Our Facilities</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">World-class infrastructure for holistic development</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="content-section">
         <div class="container-aligned">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="history-card" data-aos="fade-up">
+            <div class="row">
+                <!-- Section Navigation -->
+                <div class="col-lg-3">
+                    <div class="section-nav">
+                        <nav class="nav flex-column">
+                            <a class="nav-link active" href="#modern-facilities"><i class="fas fa-building"></i> Modern Facilities</a>
+                            <a class="nav-link" href="#atl-labs"><i class="fas fa-flask"></i> ATL Labs</a>
+                            <a class="nav-link" href="#features"><i class="fas fa-star"></i> Features</a>
+                            <a class="nav-link" href="#activities"><i class="fas fa-running"></i> Activities</a>
+                            <a class="nav-link" href="#additional-facilities"><i class="fas fa-plus-circle"></i> Additional Facilities</a>
+                        </nav>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <div class="history-card" data-aos="fade-up" id="modern-facilities">
                         <h2 class="section-title">Modern Facilities</h2>
                         <p>Equipped with cutting-edge ATL labs, glass room innovations, digital learning spaces, Kadamba Ranga Mandira, skating arena, and seamless transport—our campus harmoniously blends excellence, creativity, and comfort for holistic growth.</p>
                     </div>
 
                     <!-- ATL Labs Section -->
-                    <div class="history-card" data-aos="fade-up">
+                    <div class="history-card" data-aos="fade-up" id="atl-labs">
                         <h3 class="section-title">ATL Labs</h3>
                         <div class="row g-4">
                             <div class="col-md-6">
@@ -575,7 +662,7 @@
                     </div>
 
                     <!-- Transportation Section -->
-                    <div class="history-card" data-aos="fade-up">
+                    <div class="history-card" data-aos="fade-up" id="features">
                         <h3 class="section-title">Features</h3>
                         <div class="row g-4">
                             <div class="col-md-6">
@@ -604,7 +691,7 @@
                     </div>
 
                     <!-- Glass Room Section -->
-                    <div class="history-card" data-aos="fade-up">
+                    <div class="history-card" data-aos="fade-up" id="activities">
                         <h3 class="section-title">Activities</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
@@ -644,7 +731,7 @@
                     </div>
 
                     <!-- Additional Facilities Section -->
-                    <div class="history-card" data-aos="fade-up">
+                    <div class="history-card" data-aos="fade-up" id="additional-facilities">
                         <h3 class="section-title">Additional Facilities</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
@@ -890,6 +977,30 @@
                     dropdown.classList.remove('show');
                     toggle.classList.remove('show');
                     menu.classList.remove('show');
+                });
+            });
+            
+            // Section navigation highlighting
+            const sections = document.querySelectorAll('.history-card');
+            const navLinks = document.querySelectorAll('.section-nav .nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
                 });
             });
         });
