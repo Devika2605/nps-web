@@ -147,7 +147,7 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-            padding: 5rem;
+            padding: 3rem;
             margin-bottom: 2rem;
             transition: all 0.4s ease;
             border-left: 4px solid var(--primary-red);
@@ -215,6 +215,36 @@
 
         .download-btn i {
             font-size: 1.2rem;
+        }
+
+        /* Navigation Buttons */
+        .section-nav {
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-pills .nav-link {
+            color: var(--dark-grey);
+            font-weight: 500;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills .nav-link:hover {
+            background-color: rgba(140, 21, 21, 0.1);
+            color: var(--primary-red);
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-red);
+            color: white;
         }
 
         /* Footer */
@@ -314,6 +344,11 @@
                 border-radius: 0.5rem;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
                 margin-top: 1rem;
+            }
+
+            .section-nav {
+                position: static;
+                margin-bottom: 2rem;
             }
         }
 
@@ -569,9 +604,11 @@
                                         <span class="ms-2 small">&rsaquo;</span>
                                     </a>
                                     <ul class="dropdown-menu submenu">
-                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
-                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
-                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="president.html">President's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="secretary.html">Secretary's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="directors.html">Board of Directors</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -629,18 +666,46 @@
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
         <div class="container text-center position-relative z-index-2">
-            <h1 class="hero-title animate_animated animate_fadeInDown">CBSE Affiliation</h1>
-            <p class="lead animate_animated animatefadeInUp animate_delay-1s">Official documents and information</p>
+            <h1 class="hero-title animate__animated animate__fadeInDown">CBSE Affiliation</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Official documents and information</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="content-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
+        <div class="container-lg"> <!-- Changed to container-lg for slightly smaller width -->
+            <div class="row">
+                <!-- Navigation Sidebar -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="section-nav">
+                        <h5 class="mb-3">Quick Navigation</h5>
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#general-info">General Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#documents-info">Documents & Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#result-academics">Result & Academics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#staff-teaching">Staff (Teaching)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#result-class-x">Result Class X</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#school-infra">School Infrastructure</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="col-lg-9">
                     <!-- General Information -->
-                    <div class="info-card animate_animated animate_fadeIn" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn" data-aos="fade-up" id="general-info">
                         <h2 class="section-title">A. GENERAL INFORMATION</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -698,7 +763,7 @@
                     </div>
 
                     <!-- Documents and Information -->
-                    <div class="info-card animate_animated animatefadeIn animate_delay-1s" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-1s" data-aos="fade-up" id="documents-info">
                         <h2 class="section-title">B. DOCUMENTS AND INFORMATION</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -724,8 +789,7 @@
                                         <td>COPIES OF SOCIETIES/TRUST/COMPANY REGISTRATION/MEMORANDUM, AS APPLICABLE
                                         </td>
                                         <td><a href="images/cbse-affiliation/details of chairman and society.pdf"
-                                                class="download-btn" download><i class="fas fa-download"></i> Details of
-                                                Chairman & Members by Society</a></td>
+                                                class="download-btn" download><i class="fas fa-download"></i> SOCIETY DOCS</a></td>
                                         <td>26/04/2025</td>
                                     </tr>
                                     <tr>
@@ -733,7 +797,7 @@
                                         <td>Copy of the No Objection Certificate (NOC) issued if applicable by the State
                                             Govt./UT</td>
                                         <td><a href="images/cbse-affiliation/noc.pdf" class="download-btn" download><i
-                                                    class="fas fa-download"></i> State Government NOC</a></td>
+                                                    class="fas fa-download"></i> State Govt NOC</a></td>
                                         <td>26/04/2025</td>
                                     </tr>
                                     <tr>
@@ -758,7 +822,7 @@
                                         <td>Copies of valid Fire Safety Certification issued by the Competent Authority
                                         </td>
                                         <td><a href="images/cbse-affiliation/nps fire saqfety.pdf" class="download-btn"
-                                                download><i class="fas fa-download"></i> HPS FIRE-SAFETY 2023-24</a>
+                                                download><i class="fas fa-download"></i> NPS FIRE-SAFETY</a>
                                         </td>
                                         <td>24/04/2025</td>
                                     </tr>
@@ -783,7 +847,7 @@
                     </div>
 
                     <!-- Result and Academics -->
-                    <div class="info-card animate_animated animatefadeIn animate_delay-2s" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-2s" data-aos="fade-up" id="result-academics">
                         <h2 class="section-title">C. RESULT AND ACADEMICS</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -805,22 +869,20 @@
                                         <td>2</td>
                                         <td>ANNUAL ACADEMIC CALENDER</td>
                                         <td><a href="images/cbse-affiliation/annual calender.pdf" class="download-btn"
-                                                download><i class="fas fa-download"></i> Annual Educational calendar</a>
+                                                download><i class="fas fa-download"></i> Annual calendar</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>LIST OF SCHOOL MANAGEMENT COMMITTEE (SMC)</td>
                                         <td><a href="images/cbse-affiliation/school management committe.pdf"
-                                                class="download-btn" download><i class="fas fa-download"></i> School
-                                                management committee</a></td>
+                                                class="download-btn" download><i class="fas fa-download"></i> Committee</a></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>LIST OF PARENT TEACHERS ASSOCIATION (PTA) MEMBERS</td>
                                         <td><a href="images/cbse-affiliation/parents teachers association.pdf"
-                                                class="download-btn" download><i class="fas fa-download"></i> Parents
-                                                Teachers Association</a></td>
+                                                class="download-btn" download><i class="fas fa-download"></i> Association</a></td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -834,7 +896,7 @@
                     </div>
 
                     <!-- Staff (Teaching) -->
-                    <div class="info-card animate_animated animatefadeIn animate_delay-3s" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-3s" data-aos="fade-up" id="staff-teaching">
                         <h2 class="section-title">D. STAFF (TEACHING)</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -892,7 +954,7 @@
                     </div>
 
                     <!-- Result Class X -->
-                    <div class="info-card animate_animated animatefadeIn animate_delay-4s" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-4s" data-aos="fade-up" id="result-class-x">
                         <h2 class="section-title">RESULT CLASS X</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -921,7 +983,7 @@
                     </div>
 
                     <!-- School Infrastructure -->
-                    <div class="info-card animate_animated animatefadeIn animate_delay-5s" data-aos="fade-up">
+                    <div class="info-card animate__animated animate__fadeIn animate__delay-5s" data-aos="fade-up" id="school-infra">
                         <h2 class="section-title">E: SCHOOL INFRASTRUCTURE</h2>
                         <div class="table-responsive">
                             <table class="info-table">
@@ -1095,6 +1157,30 @@
                         });
                     }
                 }
+            });
+
+            // Update active nav link on scroll
+            const sections = document.querySelectorAll('.info-card');
+            const navLinks = document.querySelectorAll('.nav-pills .nav-link');
+
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
             });
         });
 
