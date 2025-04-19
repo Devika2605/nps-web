@@ -34,6 +34,8 @@
             background-color: var(--light-beige);
             color: var(--dark-grey);
             line-height: 1.8;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         h1,
@@ -47,6 +49,16 @@
         }
 
         /* Navigation styles */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0 !important;
+        }
+        
         .dropdown-item:hover {
             background-color: rgba(140, 21, 21, 0.1);
             color: #8c1515;
@@ -76,6 +88,30 @@
         .dropdown-item:active {
             background-color: #8c1515 !important;
             color: #ffffff !important;
+        }
+
+        ::selection {
+            background-color: red;
+            color: white;
+        }
+        
+        /* Hover dropdown functionality */
+        .hover-dropdown:hover>.dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            border: none;
         }
 
         /* Hero Section */
@@ -109,7 +145,7 @@
 
         /* Content Section */
         .content-section {
-            padding: 5rem 0;
+            padding: 4rem 0;
             position: relative;
             z-index: 2;
         }
@@ -243,44 +279,13 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-section {
-                padding: 4rem 0;
-            }
-
-            .content-section {
-                padding: 3rem 0;
-            }
-            
-            .member-photo {
-                width: 150px;
-                height: 150px;
-            }
-        }
-        
-        ::selection {
-            background-color: red;
-            color: white;
-        }
+        /* Dropdown Submenu Styles */
         .dropdown-menu.custom-dropdown {
             right: 0 !important;
             left: auto !important;
             margin-top: 0;
-            /* Remove default dropdown spacing if needed */
         }
         
-        /* Multi-level dropdown (right side) */
         .dropdown-submenu .submenu {
             top: 0;
             left: 100%;
@@ -323,7 +328,6 @@
             font-size: 0.7rem;
         }
         
-        
         /* Only show submenu when hovering on Management specifically */
         .dropdown-submenu .submenu {
             display: none;
@@ -355,20 +359,96 @@
             font-size: 1rem;
             color: #8C1515;
         }
+        
         /* Prevent submenus from showing automatically */
         .dropdown-menu .dropdown-submenu .submenu {
             display: none !important;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
-          }
+        }
           
-          /* Show submenu only when hovering directly on 'Management' */
-          .dropdown-menu .dropdown-submenu:hover > .submenu {
+        /* Show submenu only when hovering directly on 'Management' */
+        .dropdown-menu .dropdown-submenu:hover > .submenu {
             display: block !important;
             opacity: 1;
             visibility: visible;
-          }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .container {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+            
+            .member-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .history-card {
+                padding: 1.5rem;
+            }
+            
+            /* Mobile dropdown fixes */
+            .dropdown-menu.submenu {
+                position: static !important;
+                left: auto !important;
+                margin-top: 0.5rem;
+                border: 1px solid rgba(0,0,0,.15);
+                box-shadow: none;
+            }
+            
+            .dropdown-item {
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .dropdown-menu.submenu .dropdown-item {
+                white-space: normal;
+                word-wrap: break-word;
+            }
+            
+            .navbar-brand .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-brand .logo-text h2 {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                max-width: 95%;
+            }
+            
+            .member-photo {
+                width: 120px;
+                height: 120px;
+            }
+        }
     </style>
 </head>
 
@@ -377,7 +457,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm py-3">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.html">
                     <div class="d-flex align-items-center">
                         <img src="images/logo.jpg" alt="Logo" class="me-2" style="height: 60px; margin-top: 10px;">
                         <div class="logo-text">
@@ -417,10 +497,12 @@
                                     Management
                                     <span class="ms-2 small">&rsaquo;</span>
                                     </a>
-                                    <ul class="dropdown-menu submenu">
-                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
-                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
-                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                    <ul class="dropdown-menu submenu shadow-lg" style="min-width: 250px;">
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="president.html">President's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5" href="secretary.html">Secretary's Message</a></li>
+                                        <li><hr class="dropdown-divider m-0"></li>
+                                        <li><a class="dropdown-item py-2 px-3 fs-5 active" href="directors.html">Board of Directors</a></li>
                                     </ul>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
@@ -468,8 +550,8 @@
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
         <div class="container text-center position-relative z-index-2">
-            <h1 class="hero-title animate_animated animate_fadeInDown">Board of Directors</h1>
-            <p class="lead animate_animated animatefadeInUp animate_delay-1s">Leading with vision and dedication</p>
+            <h1 class="hero-title animate__animated animate__fadeInDown">Board of Directors</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Leading with vision and dedication</p>
         </div>
     </section>
 
@@ -603,15 +685,14 @@
                                     <p class="member-position">Director</p>
                                 </div>
                             </div>
-
-                            <!-- Add more members as needed -->
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer text-white py-5" style="background-color: #111; border-top: 5px solid #ffc107;">
+    <footer class="footer text-white py-5">
         <div class="container">
           <div class="row gy-4 justify-content-center">
             <!-- About -->
@@ -686,49 +767,45 @@
 
             // Navbar scroll effect
             window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
                 if (window.scrollY > 100) {
-                    document.querySelector('.navbar').style.padding = '0.5rem 0';
+                    navbar.classList.add('scrolled');
+                    navbar.style.padding = '0.5rem 0';
                 } else {
-                    document.querySelector('.navbar').style.padding = '1rem 0';
+                    navbar.classList.remove('scrolled');
+                    navbar.style.padding = '1rem 0';
                 }
             });
         });
         
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // Initialize hover dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdowns = document.querySelectorAll('.hover-dropdown');
 
-        // Initialize animations on page load for users who don't move mouse immediately
-        setTimeout(triggerAnimations, 1000);
-        window.addEventListener("scroll", function () {
-            const navbar = document.getElementById("mainNavbar");
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                const menu = dropdown.querySelector('.dropdown-menu');
+
+                // Desktop behavior
+                dropdown.addEventListener('mouseenter', function () {
+                    if (window.innerWidth >= 992) {
+                        dropdown.classList.add('show');
+                        menu.classList.add('show');
+                        toggle.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                dropdown.addEventListener('mouseleave', function () {
+                    if (window.innerWidth >= 992) {
+                        dropdown.classList.remove('show');
+                        menu.classList.remove('show');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          document.querySelectorAll('.hover-dropdown').forEach(function (dropdown) {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            const menu = dropdown.querySelector('.dropdown-menu');
-      
-            dropdown.addEventListener('mouseenter', function () {
-              dropdown.classList.add('show');
-              toggle.classList.add('show');
-              menu.classList.add('show');
-            });
-      
-            dropdown.addEventListener('mouseleave', function () {
-              dropdown.classList.remove('show');
-              toggle.classList.remove('show');
-              menu.classList.remove('show');
-            });
-          });
-        });
-      </script>
-      <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
