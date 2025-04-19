@@ -527,7 +527,7 @@
 
         /* Prevent submenus from showing automatically */
         .dropdown-menu .dropdown-submenu .submenu {
-            display: none !important;
+            display: none;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
@@ -566,6 +566,22 @@
                 padding-left: 1.5rem;
             }
         }
+        @media (max-width: 991.98px) {
+    .dropdown-submenu .submenu {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin-left: 0;
+        padding-left: 1rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: none;
+    }
+
+    .dropdown-submenu .dropdown-item {
+        padding-left: 2rem;
+    }
+}
+
     </style>
 </head>
 
@@ -975,6 +991,39 @@
             });
         });
     </script>
+    <script>
+        // Handle multi-level dropdowns (like Management submenu)
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.dropdown-submenu > a').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+                    let nextEl = this.nextElementSibling;
+    
+                    if (nextEl && nextEl.classList.contains('dropdown-menu')) {
+                        e.preventDefault();
+                        nextEl.classList.toggle('show');
+    
+                        // Close other open submenus inside same parent
+                        let parent = this.closest('.dropdown-menu');
+                        parent.querySelectorAll('.dropdown-menu').forEach(function (submenu) {
+                            if (submenu !== nextEl) {
+                                submenu.classList.remove('show');
+                            }
+                        });
+                    }
+                });
+            });
+    
+            // Optional: Close submenus when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown-menu.show').forEach(function (submenu) {
+                        submenu.classList.remove('show');
+                    });
+                }
+            });
+        });
+    </script>
+    
     <script src="assets/js/main.js"></script>
 
 </body>
