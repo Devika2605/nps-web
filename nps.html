@@ -550,6 +550,70 @@
         word-wrap: break-word;
     }
 }
+/* Mobile View Fixes */
+@media (max-width: 768px) {
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .navbar-brand .logo-text h1 {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-brand .logo-text h2 {
+        font-size: 0.8rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem !important;
+        line-height: 1.3;
+    }
+    
+    .pillar-card, .activity-card {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100%;
+    }
+    
+    .dropdown-submenu .submenu {
+        position: relative !important;
+        left: 0 !important;
+        width: 100%;
+        box-shadow: none;
+    }
+    
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .col-md-6, .col-md-3, .col-lg-3, .col-lg-8 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Prevent horizontal scrolling on all devices */
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
 
 /* General improvements for all screens */
 .dropdown-menu.submenu {
@@ -568,6 +632,11 @@
 
 .dropdown-menu.submenu .dropdown-item:active {
     background-color: #e9ecef;
+}
+/* Prevent horizontal scrolling on all devices */
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
 }
     </style>
 </head>
