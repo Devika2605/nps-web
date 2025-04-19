@@ -47,7 +47,7 @@
             color: var(--primary-red);
         }
 
-        /*navigation bar*/
+        /navigation bar/
         /* Transparent & Stylish Dropdown */
 
         /* Dropdown items hover */
@@ -163,17 +163,19 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
 
-        /* President Message Specific Styles */
+        /* President Message Specific Styles - Updated */
         .president-profile {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin-bottom: 3rem;
+            align-items: center;
         }
 
         .president-photo {
             flex: 0 0 300px;
             max-width: 100%;
+            margin: 0 auto;
         }
 
         .president-photo img {
@@ -182,11 +184,13 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: 3px solid var(--primary-red);
+            object-fit: cover;
+            aspect-ratio: 3/4;
         }
 
         .president-info {
             flex: 1;
-            min-width: 300px;
+            min-width: 0;
         }
 
         .quote-card {
@@ -298,7 +302,7 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Adjustments */
+        /* Responsive Adjustments - Updated */
         @media (max-width: 992px) {
             .hero-title {
                 font-size: 2.8rem;
@@ -320,10 +324,29 @@
             
             .president-profile {
                 flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
             }
             
             .president-photo {
-                margin: 0 auto;
+                flex: 0 0 auto;
+                width: 80%;
+                max-width: 280px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .president-info {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .quote-card {
+                text-align: left;
+            }
+            
+            .president-signature,
+            .president-title {
+                text-align: center !important;
             }
             
             .quote-card blockquote {
@@ -334,7 +357,31 @@
             .president-signature {
                 font-size: 1.4rem;
             }
+            
+            .section-title {
+                text-align: center;
+            }
+            
+            .section-title:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .history-card {
+                padding: 1.5rem;
+            }
+            
+            .quote-card {
+                padding: 1.5rem;
+            }
+        }
+        
         ::selection {
             background-color: red;
             color: white;
@@ -540,38 +587,42 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Main Content - Updated for better mobile layout -->
     <section class="content-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="history-card animate__animated animate__fadeIn" data-aos="fade-up">
+                    <div class="history-card animate_animated animate_fadeIn" data-aos="fade-up">
                         <h2 class="section-title">President's Message</h2>
                         
                         <div class="president-profile">
                             <div class="president-photo" data-aos="fade-right">
-                                <img src="images/President’s Message/sri.g.s.narayana_rao-president.png" alt="Sri G.S. Narayana Rao, President">
+                                <img src="images/President’s Message/sri.g.s.narayana_rao-president.png" alt="Sri G.S. Narayana Rao, President" class="img-fluid">
                             </div>
                             <div class="president-info" data-aos="fade-left">
-                                <h3>Sri G.S. Narayana Rao</h3>
-                                <p class="text-muted">President, National Public School Shivamogga</p>
+                                <h3 class="text-center text-md-start">Sri G.S. Narayana Rao</h3>
+                                <p class="text-muted text-center text-md-start mb-4">President, National Public School Shivamogga</p>
                                 <div class="quote-card mb-4">
                                     <blockquote>
-                                        “Intelligence plus character—that is the goal of true education.”
+                                        "Intelligence plus character—that is the goal of true education."
                                     </blockquote>
                                 </div>
                             </div>
                         </div>
                         
-                        <p>The aim of our institution is to instill in students values like thirst for knowledge, devotion to duty, honesty and a patriotic feeling besides humanism. All our institutions have been rendering unique service, in not only dispelling ignorance and illiteracy but also in producing patriots, freedom fighters, social reformers, intellectuals, thinkers, legal luminaries, scientists, doctors, engineers and sports persons of unparalleled merit, integrity and caliber.</p>
-                        
-                        <p>I take pride in stating that National Public School, Shivamogga has carefully strode up the road of achievements, time and again striving for betterment and has carved a place for itself in the field of education. We have with us dedicated and motivated staff for achieving higher standard of education encapsulating moral, spiritual and physical growth of the children. Together we will bring out the best in each child. I wish good luck and prosperous future and hope to see this institute and its students reach the peak of success.</p>
-                        
-                        <div class="president-signature">– Sri G.S. Narayana Rao</div>
-                        <div class="president-title">President</div>
+                        <div class="president-message">
+                            <p>The aim of our institution is to instill in students values like thirst for knowledge, devotion to duty, honesty and a patriotic feeling besides humanism. All our institutions have been rendering unique service, in not only dispelling ignorance and illiteracy but also in producing patriots, freedom fighters, social reformers, intellectuals, thinkers, legal luminaries, scientists, doctors, engineers and sports persons of unparalleled merit, integrity and caliber.</p>
+                            
+                            <p>I take pride in stating that National Public School, Shivamogga has carefully strode up the road of achievements, time and again striving for betterment and has carved a place for itself in the field of education. We have with us dedicated and motivated staff for achieving higher standard of education encapsulating moral, spiritual and physical growth of the children. Together we will bring out the best in each child. I wish good luck and prosperous future and hope to see this institute and its students reach the peak of success.</p>
+                            
+                            <div class="signature-block mt-5">
+                                <div class="president-signature">– Sri G.S. Narayana Rao</div>
+                                <div class="president-title">President</div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="history-card animate__animated animate__fadeIn animate__delay-1s" data-aos="fade-up">
+                    <div class="history-card animate_animated animatefadeIn animate_delay-1s" data-aos="fade-up">
                         <div class="quote-card">
                             <blockquote>
                                 Education means acquiring knowledge. Knowledge is not memorizing knowledge. Knowledge means questioning, understanding and developing it further, relating the present to the past and projecting to the future.
