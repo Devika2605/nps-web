@@ -38,14 +38,46 @@
             color: var(--primary-red);
         }
 
+        /* Navigation styles */
+        .dropdown-item:hover {
+            background-color: rgba(140, 21, 21, 0.1);
+            color: #8c1515;
+            font-weight: 500;
+        }
+
+        .dropdown-item.active {
+            color: #fff;
+            background-color: #8c1515;
+            font-weight: bold;
+        }
+
+        .dropdown-item.active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            background-color: #8c1515 !important;
+            color: #ffffff !important;
+        }
+
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+            background: linear-gradient(rgba(237, 237, 235, 0.9), rgba(140, 21, 21, 0.95)), 
                         url('images/contact/contact-hero.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 8rem 0;
+            padding: 4rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -72,7 +104,7 @@
 
         /* Content Section */
         .content-section {
-            padding: 5rem 0;
+            padding: 3rem 0;
             position: relative;
             z-index: 2;
         }
@@ -80,7 +112,7 @@
         .section-title {
             position: relative;
             margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
         }
 
         .section-title:after {
@@ -98,7 +130,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            padding: 3rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             transition: all 0.4s ease;
             border-left: 6px solid var(--primary-red);
@@ -124,7 +156,7 @@
 
         /* Contact Info */
         .contact-info {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .contact-item {
@@ -141,20 +173,20 @@
         .contact-icon {
             background: var(--primary-red);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1rem;
             margin-right: 1.5rem;
             flex-shrink: 0;
         }
 
         /* Social Media */
         .social-media {
-            margin-top: 2rem;
+            margin-top: 0.8rem;
         }
 
         .social-icon {
@@ -166,8 +198,8 @@
             background: rgba(140, 21, 21, 0.1);
             border-radius: 50%;
             color: var(--primary-red);
-            margin-right: 1rem;
-            font-size: 1.5rem;
+            margin-right: 0.6rem;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
         }
 
@@ -182,7 +214,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            padding: 3rem;
+            padding: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -212,15 +244,15 @@
         }
 
         textarea.form-control {
-            height: auto;
+            height: 60px;
             padding: 1.5rem;
         }
 
         .btn-primary {
             background: var(--primary-red);
             border: none;
-            padding: 0.8rem 2.5rem;
-            font-weight: 600;
+            padding: 0.3rem 1.3rem;
+            font-weight: 300;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s ease;
@@ -260,30 +292,130 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            height: 300px;
+            height: 200px;
             margin-top: 1.5rem;
         }
 
         .map-container iframe {
             width: 100%;
             height: 100%;
-            border: none;
+            border: 2px solid var(--primary-red);
         }
 
         /* Container adjustments */
         .custom-container {
-            max-width: 1140px;
-            padding: 0 20px;
+            max-width: 1200px;
+            padding: 0 40px;
+            margin: 0 auto;
         }
 
+        /* Multi-level dropdown (right side) */
+        .dropdown-submenu .submenu {
+            top: 0;
+            left: 100%;
+            margin-left: 0.1rem;
+            display: none;
+            position: absolute;
+            border-radius: 0.375rem;
+            background-color: white;
+            z-index: 1050;
+        }
+        
+        .dropdown-submenu:hover>.submenu {
+            display: block;
+        }
+        
+        .dropdown-submenu>a::after {
+            content: "▶";
+            float: right;
+            margin-top: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .submenu {
+            transition: all 0.2s ease;
+        }
+        
+        /* Submenu opens to the right */
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu>.dropdown-item {
+            position: relative;
+        }
+        
+        .dropdown-submenu>.dropdown-item::after {
+            content: "▶";
+            position: absolute;
+            right: 10px;
+            font-size: 0.7rem;
+        }
+        
+        /* Only show submenu when hovering on Management specifically */
+        .dropdown-submenu .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 0.2rem;
+            background: #fff;
+            min-width: 220px;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1050;
+        }
+        
+        /* Show only when hovering directly on the .submenu-trigger */
+        .dropdown-submenu:hover>.submenu {
+            display: block;
+            opacity: 1;
+            font-size: visible;
+        }
+        
+        /* Optional: remove default caret */
+        .dropdown-submenu>a::after {
+            display: none;
+        }
+        
+        /* Small subtle arrow to the right */
+        .submenu-trigger span {
+            font-size: 1rem;
+            color: #8C1515;
+        }
+        /* Prevent submenus from showing automatically */
+        .dropdown-menu .dropdown-submenu .submenu {
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+          }
+          
+          /* Show submenu only when hovering directly on 'Management' */
+          .dropdown-menu .dropdown-submenu:hover > .submenu {
+            display: block !important;
+            opacity: 1;
+            visibility: visible;
+          }
+
         /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .custom-container {
+                max-width: 900px;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero-title {
                 font-size: 3rem;
             }
             
             .custom-container {
-                max-width: 960px;
+                max-width: 800px;
+            }
+            
+            .contact-card, .contact-form {
+                padding: 2rem;
             }
         }
 
@@ -299,19 +431,31 @@
             .content-section {
                 padding: 3rem 0;
             }
-
-            .contact-card, .contact-form {
-                padding: 2rem;
-            }
             
             .custom-container {
-                max-width: 720px;
+                max-width: 700px;
             }
         }
         
         @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
             .custom-container {
-                max-width: 540px;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .contact-card, .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-right: 1rem;
             }
         }
     </style>
@@ -342,6 +486,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
+
+                        <!-- Dropdown -->
                         <li class="nav-item dropdown hover-dropdown">
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -353,13 +499,25 @@
                                 <li><a class="dropdown-item" href="nps.html">NPS</a></li>
                                 <li><a class="dropdown-item" href="vission-mission.html">Vision & Mission</a></li>
                                 <li><hr class="dropdown-divider"></li>
+                                <!-- Management Submenu (inside About School dropdown) -->
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                    Management
+                                    <span class="ms-2 small">&rsaquo;</span>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="president.html">President's Message</a></li>
+                                        <li><a class="dropdown-item" href="secretary.html">Secretary's Message</a></li>
+                                        <li><a class="dropdown-item" href="directors.html">Board of Directors</a></li>
+                                    </ul>
+                                </li>
                                 <li><a class="dropdown-item" href="principal-desk.html">Principal's Desk</a></li>
-                                <li><a class="dropdown-item" href="management.html">Management</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="board-results.html">Board Results</a></li>
+                                <li><a class="dropdown-item" href="result.html">Board Results</a></li>
                                 <li><a class="dropdown-item" href="cbse-affiliation.html">CBSE Affiliation</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item"><a class="nav-link" href="magazine.html">Magazine</a></li>
                         <li class="nav-item dropdown hover-dropdown">
                             <a class="nav-link dropdown-toggle custom-arrow" href="#" id="aboutDropdownNav" role="button"
@@ -399,8 +557,8 @@
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center">
         <div class="container text-center position-relative z-index-2">
-            <h1 class="hero-title animate__animated animate__fadeInDown">Contact Us</h1>
-            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">We'd love to hear from you! Reach out to us for any inquiries or information.</p>
+            <h1 class="hero-title animate_animated animate_fadeInDown">Contact Us</h1>
+            <p class="lead animate_animated animatefadeInUp animate_delay-1s">We'd love to hear from you! Reach out to us for any inquiries or information.</p>
         </div>
     </section>
 
@@ -410,7 +568,7 @@
             <div class="row">
                 <!-- Contact Information -->
                 <div class="col-lg-5 mb-5 mb-lg-0">
-                    <div class="contact-card animate__animated animate__fadeInLeft" data-aos="fade-right">
+                    <div class="contact-card animate_animated animate_fadeInLeft" data-aos="fade-right">
                         <h2 class="section-title">Get in Touch</h2>
                         <p>We're here to answer any questions you may have about our school. Reach out to us and we'll respond as soon as we can.</p>
                         
@@ -451,12 +609,11 @@
                             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                             <a href="https://www.instagram.com/nps_shivamogga" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://youtube.com/@nationalpublicschoolshivam1377" class="social-icon"><i class="fab fa-youtube"></i></a>
                         </div>
                         
                         <!-- Map inside the Get in Touch card -->
-                        <div class="map-container animate__animated animate__fadeInLeft animate__delay-1s" data-aos="fade-right" data-aos-delay="200">
+                        <div class="map-container animate_animated animatefadeInLeft animate_delay-1s" data-aos="fade-right" data-aos-delay="200">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.1234567890123!2d75.56789123456789!3d13.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbba931e3e9947f%3A0xe81532031441bb2e!2sNational%20Public%20School!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
@@ -464,7 +621,7 @@
                 
                 <!-- Contact Form -->
                 <div class="col-lg-7">
-                    <div class="contact-form animate__animated animate__fadeInRight" data-aos="fade-left">
+                    <div class="contact-form animate_animated animate_fadeInRight" data-aos="fade-left">
                         <h2 class="section-title">Send Us a Message</h2>
                         <p>Fill out the form below and we'll get back to you as soon as possible.</p>
                         
@@ -485,12 +642,6 @@
                             
                             <textarea class="form-control" id="message" name="message" rows="6" placeholder="Message *" required></textarea>
                             
-                            <!-- Simple CAPTCHA -->
-                            <div class="math-captcha">
-                                <p>Please solve this simple math problem to prove you're human:</p>
-                                <p>What is 7 + 20? <input type="text" id="captcha" name="captcha" required></p>
-                            </div>
-                            
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     <i class="fas fa-paper-plane me-2"></i> SEND MESSAGE
@@ -499,9 +650,9 @@
                         </form>
                     </div>
                     
-                    <div class="text-center mt-4 animate__animated animate__fadeInRight animate__delay-1s" data-aos="fade-left" data-aos-delay="200">
-                        <img src="images/pillangiri-security.png" alt="Pillangiri Security" style="height: 50px;">
-                        <p class="small text-muted mt-2">Pillangiri Security®</p>
+                    <div class="text-center mt-4 animate_animated animatefadeInRight animate_delay-1s" data-aos="fade-left" data-aos-delay="200">
+                        <img src="images/nps/main image.png" alt="Pillangiri Security" style="height: 180px;">
+                        <p class="small text-muted mt-2">NPS Shivamogga®</p>
                     </div>
                 </div>
             </div>
@@ -578,14 +729,6 @@
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Simple CAPTCHA validation
-            const captcha = document.getElementById('captcha');
-            if (captcha.value !== "27") {
-                showFormStatus('Please solve the math problem correctly to prove you are human.', 'error');
-                captcha.focus();
-                return;
-            }
-            
             const form = e.target;
             const formData = new FormData(form);
             const submitButton = form.querySelector('button[type="submit"]');
@@ -623,7 +766,7 @@
         function showFormStatus(message, type) {
             const statusElement = document.getElementById('formStatus');
             statusElement.textContent = message;
-            statusElement.className = `form-status ${type}`;
+            statusElement.className = form-status ${type};
             
             // Scroll to status message
             statusElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -662,33 +805,6 @@
                 });
             });
         });
-        const form = document.getElementById("contactForm");
-  const formStatus = document.getElementById("formStatus");
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        formStatus.innerHTML = '<div class="alert alert-success mt-3">Thanks! Your message has been sent.</div>';
-        form.reset();
-      } else {
-        formStatus.innerHTML = '<div class="alert alert-danger mt-3">Oops! Something went wrong. Please try again.</div>';
-      }
-    } catch (error) {
-      formStatus.innerHTML = '<div class="alert alert-danger mt-3">An error occurred. Please check your connection.</div>';
-    }
-  });
     </script>
 </body>
 </html>
